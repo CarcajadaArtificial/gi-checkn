@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  date: 2018-01-23
+  time: 2018-01-23 23:16:07
+  location: MyString
+  host: MyString
+  capacity: 1
+  overAttendance: 1
+  Event: one
+  TicketType: one
+
+two:
+  name: MyString
+  description: MyText
+  date: 2018-01-23
+  time: 2018-01-23 23:16:07
+  location: MyString
+  host: MyString
+  capacity: 1
+  overAttendance: 1
+  Event: two
+  TicketType: two

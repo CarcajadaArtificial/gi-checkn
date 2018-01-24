@@ -1,0 +1,2 @@
+class SingleAccess < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class MultipleAccess < ApplicationRecord
+end
