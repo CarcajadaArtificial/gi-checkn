@@ -1,0 +1,118 @@
+@import "_colors.scss";
+
+div.eventProfile {
+
+  h1.title{
+    font-weight: 400;
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  p.description{
+    font-size: 1rem;
+    margin: 1.5rem 1.5rem 0 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: $platinum-d;
+  }
+
+  div.gradient{
+    height: 100px;
+    width: 100%;
+    background: linear-gradient(45deg, $cucumber-l, $cucumber-d);
+  }
+
+  div.logo{
+    height: 100px;
+    width: 100px;
+    border-radius: 55px;
+    margin: -50px auto 0 auto;
+    background-color: $carbon;
+    border: 5px solid $snow;
+  }
+
+  div.icon-text_combo{
+    margin-bottom: 1rem;
+
+    i.material-icons{
+      font-size: 1.5rem;
+      margin-left: 1.5rem;
+      color: $cucumber-d;
+    }
+
+    p.title{
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0.2rem 1rem;
+    }
+
+    p.subtitle{
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: $titanium-d;
+      margin: 0.2rem 1rem;
+    }
+  }
+
+  div.section-marker{
+    width: 100%;
+    background-color: $platinum-xl;
+    border-top: 1px solid $platinum-d;
+    border-bottom: 1px solid $platinum-d;
+
+    p.marker{
+      font-size: 0.75rem;
+      margin: 0.75rem 1.5rem 0.5rem 1.5rem;
+      color: $titanium-d;
+    }
+  }
+
+  div.ticket{
+    margin-bottom: 1rem;
+
+    div.ticket-hole{
+      height: 50px;
+      width: 50px;
+      border-radius: 25px;
+      background-color: $platinum-xl;
+      margin: 0 -25px;
+      z-index: 2;
+    }
+
+    div.ticket-body{
+      z-index: 1;
+      width: 70%;
+      background-color: $snow;
+      padding: 1rem;
+      border-top: 5px solid $cucumber-l;
+      border-bottom: 5px solid $cucumber-l;
+      border-radius: 5px;
+      text-align: center;
+
+      p.activity-title{
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      p.activity-detail{
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  div.floating{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 10;
+
+    a.button{
+      background-color: snow;
+      padding: 0.5rem 1rem;
+      border: 2px solid $cucumber-d;
+      border-radius: 100px;
+    }
+  }
+  
+}

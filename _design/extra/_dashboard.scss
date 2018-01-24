@@ -1,0 +1,103 @@
+@import "_colors.scss";
+
+body.dashboard{
+  background-color: $titanium-xd;
+  padding-bottom: 3.5rem;
+
+  header{
+    background-color: $titanium-d;
+    border-radius: 0 0 5px 5px;
+    padding: 3rem 0;
+    box-shadow: 0 5px 15px 1px rgba(0,0,0,0.10);
+
+    p.title{
+      margin-top: 1rem;
+      text-align: center;
+      color: $snow;
+    }
+  }
+
+  nav{
+    position: fixed;
+    background-color: $titanium-d;
+    bottom: 0;
+
+    &.closed{
+      // flRow-aiCen-jcBet
+      border-radius: 5px 5px 0 0;
+      width: 100vw;
+    }
+
+    &.open{
+      width: 100vw;
+      height: 100vh;
+      box-shadow: 0 5px 15px 1px rgba(0,0,0,0.10);
+    }
+
+    a{
+      padding: 0.75rem;
+    }
+
+    .material-icons{
+      color: $snow;
+    }
+  }
+
+
+  main{
+
+    p.section_title{
+      padding: 1.5rem 0 0.75rem 0;
+      font-weight: 500;
+      color: $platinum-l;
+    }
+
+    p.header{
+      font-size: 1rem;
+      text-align: center;
+      padding-left: 1rem;
+    }
+
+    p.value{
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      padding-right: 1rem;
+    }
+
+
+    div.total{
+      padding: 0.5rem 0;
+      border-top: 3px solid $water;
+      width: 100%;
+
+      + div.total{
+        margin-top: 0.5rem;
+      }
+    }
+
+    div.big_chart{
+      border-top: 3px solid $cucumber;
+      width: 100%;
+      height: 180px;
+    }
+
+    div.small_chart{
+      border-top: 3px solid $grape;
+      width: 46%;
+      height: 120px;
+      margin-bottom: 1rem;
+    }
+
+    div.top_staff{
+      width: 100%;
+      border-top: 3px solid $mango;
+      padding: 0.5rem 0;
+
+      p.header, p.value{
+        margin: 0.25rem 0;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import "_colors.scss";
+
+* {
+  font-family: 'Roboto', monospace;
+  color: $carbon;
+}
+
+a{
+  cursor: pointer;
+}

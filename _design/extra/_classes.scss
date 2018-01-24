@@ -1,0 +1,101 @@
+@import "_colors.scss";
+
+// Breakpoints
+// Variable boundries
+$phone-only-size:           599px;
+$tablet-portrait-up-size:   600px;
+$tablet-landscape-up-size:  900px;
+$desktop-up-size:           1200px;
+$big-desktop-up-size:       1600px;
+// Mixins
+@mixin for-phone-only {
+  @media (max-width: $phone-only-size) { @content; }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: $tablet-portrait-up-size) { @content; }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: $tablet-landscape-up-size) { @content; }
+}
+@mixin for-desktop-up {
+  @media (min-width: $desktop-up-size) { @content; }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: $big-desktop-up-size) { @content; }
+}
+
+// Flex
+[class*="flRow"]  { display: flex; flex-direction: row;             }
+[class*="flCol"]  { display: flex; flex-direction: column;          }
+[class*="flRowR"] { display: flex; flex-direction: row-reverse;     }
+[class*="flColR"] { display: flex; flex-direction: column-reverse;  }
+[class*="aiBas"]  { align-items: baseline;    }
+[class*="aiCen"]  { align-items: center;      }
+[class*="aiEnd"]  { align-items: flex-end;    }
+[class*="aiSta"]  { align-items: flex-start;  }
+[class*="aiStr"]  { align-items: stretch;     }
+[class*="jcCen"]  { justify-content: center;        }
+[class*="jcEnd"]  { justify-content: flex-end;      }
+[class*="jcSta"]  { justify-content: flex-start;    }
+[class*="jcAro"]  { justify-content: space-around;  }
+[class*="jcBet"]  { justify-content: space-between; }
+[class*="fwNow"]  { flex-wrap: nowrap;       }
+[class*="fwWra"]  { flex-wrap: wrap;         }
+[class*="fwRev"]  { flex-wrap: wrap-reverse; }
+
+// Margin center
+.margin-center{
+  margin: 0 auto;
+}
+
+// Color classes
+.indigo     { background-color: $indigo;     }
+.indigo-xl  { background-color: $indigo-xl;  }
+.indigo-l   { background-color: $indigo-l;   }
+.indigo-d   { background-color: $indigo-d;   }
+.indigo-xd  { background-color: $indigo-xd;  }
+
+.grape    { background-color: $grape;     }
+.grape-xl { background-color: $grape-xl;  }
+.grape-l  { background-color: $grape-l;   }
+.grape-d  { background-color: $grape-d;   }
+.grape-xd { background-color: $grape-xd;  }
+
+.apple    { background-color: $apple;     }
+.apple-xl { background-color: $apple-xl;  }
+.apple-l  { background-color: $apple-l;   }
+.apple-d  { background-color: $apple-d;   }
+.apple-xd { background-color: $apple-xd;  }
+
+.mango    { background-color: $mango;     }
+.mango-xl { background-color: $mango-xl;  }
+.mango-l  { background-color: $mango-l;   }
+.mango-d  { background-color: $mango-d;   }
+.mango-xd { background-color: $mango-xd;  }
+
+.cucumber     { background-color: $cucumber;    }
+.cucumber-xl  { background-color: $cucumber-xl; }
+.cucumber-l   { background-color: $cucumber-l;  }
+.cucumber-d   { background-color: $cucumber-d;  }
+.cucumber-xd  { background-color: $cucumber-xd; }
+
+.water    { background-color: $water;     }
+.water-xl { background-color: $water-xl;  }
+.water-l  { background-color: $water-l;   }
+.water-d  { background-color: $water-d;   }
+.water-xd { background-color: $water-xd;  }
+
+.platinum     { background-color: $platinum;    }
+.platinum-xl  { background-color: $platinum-xl; }
+.platinum-l   { background-color: $platinum-l;  }
+.platinum-d   { background-color: $platinum-d;  }
+.platinum-xd  { background-color: $platinum-xd; }
+
+.titanium     { background-color: $titanium;    }
+.titanium-xl  { background-color: $titanium-xl; }
+.titanium-l   { background-color: $titanium-l;  }
+.titanium-d   { background-color: $titanium-d;  }
+.titanium-xd  { background-color: $titanium-xd; }
+
+.carbon { background-color: $carbon;  }
+.snow   { background-color: $snow;    }
