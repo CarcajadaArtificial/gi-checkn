@@ -7,8 +7,7 @@ class CreateTickets < ActiveRecord::Migration[5.1]
       t.string :fullName
       t.boolean :sex
       t.string :state
-      t.reference :TicketType
-
+      t.references :ticket_type
       t.timestamps
     end
   end
