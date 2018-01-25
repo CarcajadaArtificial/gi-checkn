@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  attended: false
+  ticket: one
+  activity: one
+
+two:
+  attended: false
+  ticket: two
+  activity: two

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124174131) do
+ActiveRecord::Schema.define(version: 20180125001716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 20180124174131) do
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["ticket_id"], name: "index_answers_on_ticket_id"
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.boolean "attended"
+    t.bigint "ticket_id"
+    t.bigint "activity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_attendances_on_activity_id"
+    t.index ["ticket_id"], name: "index_attendances_on_ticket_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -142,4 +152,16 @@ ActiveRecord::Schema.define(version: 20180124174131) do
 
   add_foreign_key "activities", "activity_types"
   add_foreign_key "activities", "events"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "tickets"
+  add_foreign_key "attendances", "activities"
+  add_foreign_key "attendances", "tickets"
+  add_foreign_key "multiple_accesses", "activity_types"
+  add_foreign_key "multiple_accesses", "ticket_types"
+  add_foreign_key "questions", "ticket_types"
+  add_foreign_key "roles", "events"
+  add_foreign_key "roles", "users"
+  add_foreign_key "single_accesses", "activities"
+  add_foreign_key "single_accesses", "ticket_types"
+  add_foreign_key "tickets", "ticket_types"
 end

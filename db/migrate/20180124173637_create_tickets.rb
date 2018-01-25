@@ -7,7 +7,7 @@ class CreateTickets < ActiveRecord::Migration[5.1]
       t.string :fullName
       t.boolean :sex
       t.string :state
-      t.references :ticket_type
+      t.references :ticket_type, foreign_key: true
       t.timestamps
     end
   end
