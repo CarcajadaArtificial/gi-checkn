@@ -115,8 +115,10 @@ ActiveRecord::Schema.define(version: 20180125001716) do
     t.string "name"
     t.text "description"
     t.float "price"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_ticket_types_on_event_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -163,5 +165,6 @@ ActiveRecord::Schema.define(version: 20180125001716) do
   add_foreign_key "roles", "users"
   add_foreign_key "single_accesses", "activities"
   add_foreign_key "single_accesses", "ticket_types"
+  add_foreign_key "ticket_types", "events"
   add_foreign_key "tickets", "ticket_types"
 end
