@@ -25,4 +25,5 @@ SingleAccess.create([{ticket_type_id: 1, activity_id: 1},
 MultipleAccess.create([{ticket_type_id: 1, activity_type_id: 1, amount: 2},
                        {ticket_type_id: 2, activity_type_id: 2, amount: 2}])
 
-Question.create(ticket_type_id: 1, sentence: "What is love?")
+Question.create([{ticket_type_id: 1, sentence: "What is love?"},
+                 {ticket_type_id: 1, sentence: "This too shall pass"}])
