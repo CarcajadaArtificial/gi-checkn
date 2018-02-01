@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  urlName: MyString
+  startDate: 2018-01-23
+  endDate: 2018-01-23
+  imageUrl: MyString
+  mainColor: MyString
+  color2: MyString
+  locationCode: MyString
+
+two:
+  name: MyString
+  description: MyText
+  urlName: MyString
+  startDate: 2018-01-23
+  endDate: 2018-01-23
+  imageUrl: MyString
+  mainColor: MyString
+  color2: MyString
+  locationCode: MyString
