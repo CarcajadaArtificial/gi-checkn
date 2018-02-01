@@ -14,4 +14,9 @@ class PagesController < ApplicationController
   def profile
 
   end
+
+  # Page not found, checkn.mx/404
+  def error404
+
+  end
 end

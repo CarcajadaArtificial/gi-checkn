@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   root            to: "pages#index"
   get 'login',    to: 'pages#login',    as: 'login'
   get 'profile',  to: 'pages#profile',  as: 'profile'
+  get 'error404', to: 'pages#error404', as: 'error404' 
   # Devise
   devise_for :users
 end
