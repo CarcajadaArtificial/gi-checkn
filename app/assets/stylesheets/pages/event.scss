@@ -1,0 +1,116 @@
+@import "_colors.scss";
+@import "_flex.scss";
+@import "_breakpoints.scss";
+
+div.event {
+  &.show {
+    background-color: $cucumber;
+    min-height: calc(100vh - 4rem);
+    width: 100vw;
+    @include flex(col, cen, end);
+
+    div.container{
+      @include flex(col, cen, sta);
+      width: 50vw;
+      min-height: 85vh;
+      background-color: $snow;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      border-radius: 5px 5px 0 0;
+      margin-top: 6rem;
+
+      div.separator{
+        width: 90%;
+        height: 2px;
+        margin: 2rem auto;
+        background-color: $titanium;
+      }
+
+      section.introduction{
+        @include flex(col, cen, sta);
+
+        div.image{
+          margin-top: 2rem;
+          width: 300px;
+          height: 300px;
+          border-radius: 150px;
+          background-color: $platinum-xl;
+          background-image: url("https://occ.edu/assets/uploads/files/TheEventLogo.png");
+          background-position: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+
+        h1.title{
+          font-size: 3rem;
+          text-align: center;
+          margin: 2rem 0;
+        }
+
+        div.combo-textIcon{
+          @include flex(row, cen, cen);
+
+          i.material-icons{
+            margin: 1rem;
+          }
+        }
+      }
+
+      section.description{
+        padding: 0 4rem;
+
+        p.title{
+          font-weight: 600;
+          margin-bottom: 1rem;
+          font-size: 22px;
+        }
+
+        p.content{
+          font-family: 'Roboto';
+          margin-bottom: 1.2rem;
+        }
+
+        iframe{
+          width: 100%;
+          height: 400px;
+        }
+      }
+    }
+  }
+
+  @include breakpoint_byRange(tin, sma){
+    &.show{
+
+      div.container{
+        width: 90vw;
+        margin-top: 4rem;
+
+        div.separator{
+          width: 85%;
+        }
+
+        section.introduction{
+
+          div.image{
+            width: 80vw;
+            height: 80vw;
+          }
+
+          h1.title{
+            margin-bottom: 1rem;
+          }
+
+          div.combo-textIcon{
+            padding-right: 1rem;
+            p{
+              font-size: 14px;
+            }
+          }
+        }
+
+        section.description{
+          padding: 0 2rem;
+        }
+      }
+    }
+  }
+}

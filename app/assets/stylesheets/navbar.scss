@@ -1,0 +1,61 @@
+@import "_colors.scss";
+@import "_flex.scss";
+@import "_breakpoints.scss";
+
+nav{
+  height: 4rem;
+  background-color: $snow;
+  border-bottom: 1px solid $platinum;
+  padding: 0.5rem 3rem;
+  @include flex(row, cen, bet);
+
+  img{
+    height: 2rem;
+  }
+
+  div.link__list{
+
+    a.link{
+      padding: 0.5rem 1rem 0.2rem 1rem;
+      font-weight: 600;
+      
+      &:hover{
+        border-bottom: 2px solid $carbon;
+      }
+      + a.link, + a.link--main{
+        margin-left: 1rem;
+      }
+    }
+
+    a.link--main{
+      padding: 0.5rem 1rem 0.2rem 1rem;
+      border-bottom: 2px solid $carbon;
+      border-radius: 5px 5px 0 0;
+      font-weight: 600;
+
+      &:hover{
+        background-color: $mango-l;
+      }
+    }
+
+    i.material-icons{
+      display: none;
+    }
+  }
+
+  @include breakpoint_byRange(tin, sma){
+      @include flex(row, cen, bet);
+      padding: 0.5rem 1.5rem;
+
+      div.link__list{
+
+        *:not(.material-icons){
+          display: none;
+        }
+
+        i.material-icons{
+          display: inline-block;
+        }
+      }
+  };
+}
