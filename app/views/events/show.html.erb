@@ -1,1 +1,8 @@
 <h1>Show</h1>
+<%for i in 0..(@activities_by_day.length - 1)%>
+  <%=@activities_by_day[i].first.date%>
+  <% @temp = @activities_by_day[i]%>
+  <% @temp.each do |activity|%>
+      <%= activity.host %>
+  <%end%>
+<%end%>

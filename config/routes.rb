@@ -15,10 +15,13 @@ Rails.application.routes.draw do
   post 'events',                  to: 'events#create',        as: 'event_create'
   put 'events/:id',               to: 'events#update',        as: 'event_update'
   delete 'events/:id',            to: 'events#destroy',       as: 'event_delete'
+  # Ticket actions
+  post 'tickets',                 to: 'tickets#create',       as: 'ticket_create'
   # Static Pages
   root            to: "pages#index"
   get 'login',    to: 'pages#login',    as: 'login'
   get 'profile',  to: 'pages#profile',  as: 'profile'
+  get 'error404', to: 'pages#error404', as: 'error404'
   # Devise
   devise_for :users
 end

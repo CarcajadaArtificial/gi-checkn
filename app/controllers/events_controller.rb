@@ -7,6 +7,8 @@ class EventsController < ApplicationController
                                                 # Alias: event_home
                                                 # Description: Display all the information of an event.
   def show
+    @event = Event.find(params[:id])
+    @activities_by_day = @event.activities_by_day
   end
                                                 # ======================================================
                                                 # Method: preregister
@@ -40,6 +42,11 @@ class EventsController < ApplicationController
                                                 # Description: Helps the staff sell tickets. Assignes
                                                 #   email and full name to a particular ticket.
   def sale
+    @selected_ticket_type
+    @event = Event.find(params[:id])
+    @ticket_types = @event.available_ticket_types
+    puts @ticket_types.first.name
+    @ticket = Ticket.new
   end
                                                 # ======================================================
                                                 # Method: new

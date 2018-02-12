@@ -1,1 +1,8 @@
 <h1>Sale</h1>
+<%= params[:reference] %>
+<%= form_for @ticket, url: ticket_create_path do |f| %>
+  <%= f.text_field :fullName %>
+  <%= f.text_field :email %>
+  <%= f.collection_select  :ticket_type_id, @ticket_types, :id, :name, prompt: "Selecciona el tipo de boleto"%>
+  <%= f.submit "Create" %>
+<% end %>

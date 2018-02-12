@@ -10,11 +10,11 @@ Event.create(name: "Test Event",description: "This is a test event.",urlName: "t
 ActivityType.create([{name: "Conferencia", public: true},
                      {name: "Taller", public: false}])
 
-Activity.create([{event_id: 1, activity_type_id: 1, name: "Conferencia1",description: "Es la primera conferencia", date:'2018-01-28', time:"13:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300},
+Activity.create([{event_id: 1, activity_type_id: 1, name: "Conferencia1",description: "Es la primera conferencia", date:'2018-01-29', time:"13:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300},
                  {event_id: 1, activity_type_id: 1, name: "Conferencia2",description: "Es la primera conferencia", date:'2018-01-28', time:"12:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300},
-                 {event_id: 1, activity_type_id: 1, name: "Conferencia2",description: "Es la primera conferencia", date:'2018-01-28', time:"12:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300},
+                 {event_id: 1, activity_type_id: 1, name: "Conferencia2",description: "Es la primera conferencia", date:'2018-01-30', time:"12:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300},
                  {event_id: 1, activity_type_id: 2, name: "Taller1",description: "Es la primera conferencia", date:'2018-01-28', time:"14:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300},
-                 {event_id: 1, activity_type_id: 2, name: "Taller2",description: "Es la primera conferencia", date:'2018-01-28', time:"15:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300}])
+                 {event_id: 1, activity_type_id: 2, name: "Taller2",description: "Es la primera conferencia", date:'2018-01-29', time:"15:00", location:"Aulas 3", host:"Pancho Pantera", capacity: 300}])
 
 TicketType.create([{event_id: 1, name: "Azul", description: "Boleto Azul", price: "100.00"},
                    {event_id: 1, name: "Rojo", description: "Boleto Rojo", price: "150.00"}])
