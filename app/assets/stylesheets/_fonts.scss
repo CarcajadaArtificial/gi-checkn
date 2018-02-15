@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Varela+Round');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import "_colors.scss";
+@import "_breakpoints.scss";
 
 * {
   font-family: 'Varela Round';
@@ -18,5 +19,49 @@ i.material-icons{
   }
   &.large{
     font-size: 32px;
+  }
+}
+
+input[type="submit"], a.button{
+  font-size: 0.8rem;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  color: $snow;
+  background-color: $cucumber;
+  border-radius: 100px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+main, div.modal{
+  p.title{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+    @include breakpoint_byRange(tin, sma){
+      font-size: 1.5rem;
+    };
+  }
+
+  p.subtitle{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1rem 0;
+    text-align: center;
+    @include breakpoint_byRange(tin, sma){
+      font-size: 1.2rem;
+    };
+  }
+
+  p.description{
+    margin: 0 2rem 3rem 2rem;
+  }
+
+  p.label{
+    font-size: 0.8rem;
+    color: $titanium-d;
+    margin-bottom: 0.2rem;
   }
 }
