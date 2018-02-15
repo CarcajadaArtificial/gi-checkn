@@ -1,8 +1,27 @@
-<h1>Show</h1>
-<%for i in 0..(@activities_by_day.length - 1)%>
-  <%=@activities_by_day[i].first.date%>
-  <% @temp = @activities_by_day[i]%>
-  <% @temp.each do |activity|%>
-      <%= activity.host %>
-  <%end%>
-<%end%>
+<%= render 'events/partials/nav/main' %>
+<div class="event show">
+  <div class="container">
+    <section class="introduction">
+      <div class="image"></div>
+      <h1 class="title">Test Event</h1>
+      <div class="combo-textIcon">
+        <i class="material-icons">event</i>
+        <p>20 de abril del 2018 - 22 de abril del 2018</p>
+      </div>
+    </section>
+    <div class="separator"></div>
+    <section class="description">
+      <p class="title">Descripción</p>
+      <p class="content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <p class="title">Ubicación</p>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14386.379874619262!2d-100.28954!3d25.6515649!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xab5b4cc298e6fe08!2sTecnol%C3%B3gico+de+Monterrey!5e0!3m2!1sen!2smx!4v1517685757956" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </section>
+    <div class="separator"></div>
+  </div>
+</div>

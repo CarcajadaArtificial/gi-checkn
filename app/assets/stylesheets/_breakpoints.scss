@@ -1,0 +1,60 @@
+                                                // =====================================================
+                                                // Class: _breakpoints
+                                                // Description: Provides methods that manage the style
+                                                //     organization according to the screen's width and
+                                                //     orientation.
+
+                                                // =====================================================
+                                                // Constants
+                                                // TINY, 150px - 599px:
+                                                //    Phone portrait and small devices.
+  $TINY:    150px;
+                                                // SMALL, 600px - 899px:
+                                                //    Tablet portrait and phone landscape.
+  $SMALL:   600px;
+                                                // MEDIUM, 900px - 1199px:
+                                                //    Tablet landscape and some laptops.
+  $MEDIUM:  900px;
+                                                // LARGE, 1200px - 1799px:
+                                                //    Laptops and desktops.
+  $LARGE:   1200px;
+                                                // HUGE, 1800px - 2000px:
+                                                //    TVs and LARGE desktops.
+  $HUGE:    1800px;
+
+                                                // =====================================================
+                                                // Mixin: breakpoint_byRange
+                                                // Description: Saves the coding of media queries in
+                                                //    .scss files. The parameters represent screen size
+                                                //    limits. Starting size means the smallest size
+                                                //    limit, and ending size the largest. The starting
+                                                //    size must logically be a smaller or equal than the
+                                                //    ending size.
+                                                // Parameter options:
+                                                //    tin | sma | med | lar | hug
+@mixin breakpoint_byRange($size_start: sma, $size_end: lar) {
+
+  $start: $SMALL;
+  $end: $LARGE;
+
+  @if       $size_start == tin  { $start: $TINY; }
+  @else if  $size_start == sma  { $start: $SMALL; }
+  @else if  $size_start == med  { $start: $MEDIUM; }
+  @else if  $size_start == lar  { $start: $LARGE; }
+  @else if  $size_start == hug  { $start: $HUGE; }
+
+  @if       $size_end == tin  { $end: $SMALL - 1px; }
+  @else if  $size_end == sma  { $end: $MEDIUM - 1px; }
+  @else if  $size_end == med  { $end: $LARGE - 1px; }
+  @else if  $size_end == lar  { $end: $HUGE - 1px; }
+  @else if  $size_end == hug  { $end: 2000px; }
+
+  @if $start > $end {
+    @warn "The starting size (#{$size_start}) must be smaller than ending size (#{$size_end}).";
+  }
+  @else {
+    @media (min-width: $start) and (max-width: $end) {
+      @content;
+    }
+  }
+}
