@@ -1,0 +1,43 @@
+@import "_colors.scss";
+@import "_flex.scss";
+@import "_breakpoints.scss";
+@import "global.scss";
+
+main.dashboard{
+  background-color: $cucumber;
+  @include flex(col, cen, sta);
+
+  div.manager{
+    width: 100%;
+    @include flex(col, cen, sta);
+
+    div.container{
+      width: 90vw;
+
+      table{
+        width: 100%;
+        margin: 0 auto;
+        table-layout: fixed;
+        @include flex(col, sta, cen);
+        background-color: $apple-xl;
+
+        td,th{
+          font-size: 0.8rem;
+          padding-right: 0.5rem;
+          text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          display: inline-block;
+          width: 100px;
+        }
+
+        tr{
+          padding-bottom: 1rem;
+        }
+      }
+
+    }
+  }
+
+}

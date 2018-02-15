@@ -15,6 +15,7 @@
   <%= f.collection_check_boxes(:activity_ids, Activity.where(activity_type_id: multiple_access.activity_type.id, event_id: @event.id) , :id, :name)  %>
 </div>
 <%end%>
+<%= render 'events/partials/nav/secondary' %>
 
 <%= f.submit %>
 <% end %>

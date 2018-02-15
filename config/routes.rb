@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'events/:id/staff',         to: 'events#staff',         as: 'staff'
   get 'events/:id/database',      to: 'events#database',      as: 'database'
   # Event Actions
-  post 'events',                  to: 'events#create',        as: 'event_create'
+  post 'event',                   to: 'events#create',        as: 'event_create'
   put 'events/:id',               to: 'events#update',        as: 'event_update'
   delete 'events/:id',            to: 'events#destroy',       as: 'event_delete'
   # Ticket actions

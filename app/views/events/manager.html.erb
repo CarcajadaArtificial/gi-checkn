@@ -10,6 +10,8 @@
 <%when "question"%>
   <%=render partial: 'question', locals:{question: @question, event: @event, ticket_type: @ticket_type}%>
 <%end%>
+<%= render 'events/partials/nav/main' %>
+<%= render 'events/partials/nav/dashboard' %>
 
 
 <h1>Actividades</h1>

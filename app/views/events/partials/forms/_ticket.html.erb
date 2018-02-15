@@ -1,0 +1,56 @@
+<% if params.has_key?(:reference) %>
+  <%= form_for ticket, url: ticket_update_path do |f| %>
+      <div class="section-1">
+        <p class="title">Llena tus datos</p>
+        <p class="description">
+          Esta es la forma de preregistro, para empezar, llena tus datos.
+        </p>
+        <div class="field">
+          <p class="label">Nombre Completo</p>
+          <%= f.text_field :fullName %>
+        </div>
+        <div class="field">
+          <p class="label">Correo electrónico</p>
+          <%= f.text_field :email %>
+        </div>
+        <div class="field">
+          <p class="label">Sexo</p>
+          <%= f.text_field :email %>
+        </div>
+        <div class="field">
+          <p class="label">Estado de proveniencia</p>
+          <%= f.text_field :email %>
+        </div>
+        <a class="button" id="preregister_continue">Continuar</a>
+      </div>
+      <div class="section-2 dissapear">
+        <p class="title">Llena tus datos</p>
+        <p class="description">
+          Esta es la forma de preregistro, para empezar, llena tus datos.
+        </p>
+        <div class="field">
+          <p class="label">Nombre Completo</p>
+          <%= f.text_field :fullName %>
+        </div>
+        <div class="field">
+          <p class="label">Correo electrónico</p>
+          <%= f.text_field :email %>
+        </div>
+        <%= f.submit "Enviar", class: "" %>
+      </div>
+  <% end %>
+<% else %>
+  <%= form_tag(preregister_path, :method => "get") do %>
+    <div class="section-0">
+      <p class="title">Preregistro</p>
+      <p class="description">
+        Esta es la forma de preregistro, para empezar, llena tus datos.
+      </p>
+      <div class="field">
+        <p class="label">Referencia</p>
+        <%= text_field_tag(:reference) %>
+      </div>
+      <%= submit_tag("Enviar") %>
+    </div>
+  <% end %>
+<% end %>

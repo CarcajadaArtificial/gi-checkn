@@ -1,0 +1,45 @@
+@import "_colors.scss";
+@import "_flex.scss";
+@import "_breakpoints.scss";
+
+nav{
+  width: 100vw;
+
+  &.main{
+    border-bottom: 2px solid $titanium-l;
+    @include flex(row, cen, cen);
+  }
+
+  &.secondary{
+    border-bottom: 2px solid $titanium-l;
+    @include flex(row, cen, bet);
+
+    img.logo{
+      margin-right: 1rem;
+    }
+
+    i.material-icons{
+      margin: 0.5rem 0 0 1rem;
+    }
+  }
+
+  &.dashboard{
+    border-top: 2px solid $titanium-l;
+    display: none;
+    @include breakpoint_byRange(tin, sma){
+      bottom: 0;
+      position: absolute;
+      width: 100vw;
+      @include flex(row, cen, aro);
+    }
+
+    div.option{
+      margin: 0.5rem 0;
+      @include flex(col, cen, cen);
+
+      a.link{
+        font-size: 0.5rem;
+      }
+    }
+  }
+}

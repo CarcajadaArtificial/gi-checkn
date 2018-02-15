@@ -1,8 +1,34 @@
-<h1>Sale</h1>
-<%= params[:reference] %>
-<%= form_for @ticket, url: ticket_create_path do |f| %>
-  <%= f.text_field :fullName %>
-  <%= f.text_field :email %>
-  <%= f.collection_select  :ticket_type_id, @ticket_types, :id, :name, prompt: "Selecciona el tipo de boleto"%>
-  <%= f.submit "Create" %>
-<% end %>
+<%= render 'events/partials/nav/main' %>
+<main class="forms">
+  <div class="container">
+    <p class="title">Venta de boleto</p>
+    <p class="description">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <%= form_for @ticket, url: ticket_create_path do |f| %>
+      <div class="field">
+        <p class="label">Nombre completo</p>
+        <%= f.text_field :fullName %>
+      </div>
+      <div class="field">
+        <p class="label">Correo electrónico</p>
+        <%= f.text_field :email %>
+      </div>
+      <%= f.collection_select  :ticket_type_id, @ticket_types, :id, :name, prompt: "Selecciona el tipo de boleto"%>
+      <%= f.submit "Create" %>
+      <% if Ticket.where(reference: params[:reference]).present? %>
+        <p class="title">Venta anterior</p>
+        <div class="record">
+          <div class="data">
+            <p class="label">Referencia</p>
+            <p class="description"><%= params[:reference] %></p>
+          </div>
+          <div class="data">
+            <p class="label">Nombre completo</p>
+            <p class="description"><%= Ticket.where(reference: params[:reference]).first.fullName %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</main>

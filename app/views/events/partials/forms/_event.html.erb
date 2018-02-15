@@ -1,0 +1,38 @@
+<%= form_for event, url: event_create_path do |f| %>
+  <p class="subtitle">Información del evento</p>
+  <div class="field">
+    <p class="label">Nombre</p>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <p class="label">Descripción</p>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <p class="label">Nombre único</p>
+    <%= f.text_field :urlName %>
+  </div>
+  <p class="subtitle">Fechas</p>
+  <div class="field">
+    <p class="label">Fecha de inicio</p>
+    <%= f.date_select :startDate %>
+  </div>
+  <div class="field">
+    <p class="label">Fecha de fin</p>
+    <%= f.date_select :endDate %>
+  </div>
+  <p class="subtitle">Estilo</p>
+  <div class="field">
+    <p class="label">URL del logo</p>
+    <%= f.text_field :imageUrl %>
+  </div>
+  <div class="field">
+    <p class="label">Color principal (#000000)</p>
+    <%= f.text_field :mainColor %>
+  </div>
+  <div class="field">
+    <p class="label">Color secundario (#000000)</p>
+    <%= f.text_field :color2 %>
+  </div>
+  <%= submit_tag("Crear") %>
+<% end %>
