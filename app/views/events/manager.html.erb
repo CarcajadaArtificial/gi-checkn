@@ -1,1 +1,163 @@
-<h1>Manager</h1>
+<%case params[:model]%>
+<%when "activity"%>
+  <%=render partial: 'activity', locals:{activity: @activity, event: @event} %>
+<%when "ticket_type"%>
+  <%=render partial: 'ticket_type', locals:{ticket_type: @ticket_type, event: @event}%>
+<%when "single_access"%>
+  <%=render partial: 'single_access', locals:{single_access: @single_access, event: @event, ticket_type: @ticket_type}%>
+<%when "multiple_access"%>
+  <%=render partial: 'multiple_access', locals:{multiple_access: @multiple_access, event: @event, ticket_type: @ticket_type}%>
+<%when "question"%>
+  <%=render partial: 'question', locals:{question: @question, event: @event, ticket_type: @ticket_type}%>
+<%end%>
+
+
+<h1>Actividades</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Actividad</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Ubicacion</th>
+        <th>Cupo</th>
+        <th>Tipo de actividad</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @event.activities.each do |activity| %>
+      <tr>
+        <td><%= activity.name %></td>
+        <td><%= activity.date %></td>
+        <td><%= activity.time.strftime "%H:%M" %></td>
+        <td><%= activity.location %></td>
+        <td><%= activity.capacity %></td>
+        <td><%= activity.activity_type.name %></td>
+        <td><%= link_to "Editar", model: "activity",activity: activity.id %></td>
+        <td>
+          <a
+          data-confirm="Confirma que deseas eliminar la actividad"
+          rel="nofollow"
+          data-method="delete"
+          href="/activities/<%= activity.id %>">Eliminar
+          </a>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+<%= link_to "Crear Actividad", model: "activity"%>
+<br>
+<h1>Tipos de Boleto</h1>
+  <table>
+    <% @event.ticket_types.each do |ticket_type| %>
+      <tr>
+        <th>Tipo de Boleto: </th>
+        <th><%=ticket_type.name%></th>
+        <th>Cantidad: </th>
+        <th><%=ticket_type.max_tickets%></th>
+        <th>Precio: </th>
+        <th><%=ticket_type.price%></th>
+        <td><%= link_to "Editar", model: "ticket_type",ticket_type: ticket_type.id %></td>
+        <td>
+          <a
+          data-confirm="Confirma que deseas eliminar el acceso directo"
+          rel="nofollow"
+          data-method="delete"
+          href="/ticket_types/<%= ticket_type.id %>">Eliminar
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <th><th>
+        <th>Accesos directos</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><%= link_to "Crear Acceso Directo", model: "single_access",ticket_type: ticket_type.id%></th>
+      </tr>
+      <% ticket_type.single_accesses.each do |single_access| %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= single_access.activity.name %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><%= link_to "Editar", model: "single_access",single_access: single_access.id %></td>
+          <td>
+            <a
+            data-confirm="Confirma que deseas eliminar el acceso directo"
+            rel="nofollow"
+            data-method="delete"
+            href="/single_accesses/<%= single_access.id %>">Eliminar
+            </a>
+          </td>
+        </tr>
+      <%end%>
+      <tr>
+        <th><th>
+        <th>Accesos Múltiples</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><%= link_to "Crear Acceso Múltiple", model: "multiple_access",ticket_type: ticket_type.id%></th>
+      </tr>
+      <% ticket_type.multiple_accesses.each do |multiple_access| %>
+        <tr>
+        <td></td>
+        <td></td>
+        <td><%= multiple_access.amount%></td>
+        <td><%= multiple_access.activity_type.name %></td>
+        <td></td>
+        <td></td>
+        <td><%= link_to "Editar", model: "multiple_access", multiple_access: multiple_access.id %></td>
+        <td>
+          <a
+          data-confirm="Confirma que deseas eliminar el acceso multiple"
+          rel="nofollow"
+          data-method="delete"
+          href="/multiple_accesses/<%= multiple_access.id %>">Eliminar
+          </a>
+        </td>
+        </tr>
+      <%end%>
+      <tr>
+        <th><th>
+        <th>Preguntas</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><%= link_to "Crear Pregunta", model: "question",ticket_type: ticket_type.id%></th>
+      </tr>
+      <% ticket_type.questions.each do |question| %>
+        <tr>
+        <td></td>
+        <td></td>
+        <td><%= question.sentence%></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= link_to "Editar", model: "question", question: question.id %></td>
+        <td>
+          <a
+          data-confirm="Confirma que deseas eliminar la pregunta"
+          rel="nofollow"
+          data-method="delete"
+          href="/questions/<%= question.id %>">Eliminar
+          </a>
+        </td>
+      </tr>
+      <%end%>
+    <%end%>
+  </table>
+<%= link_to "Crear Tipo de Boleto", model: "ticket_type"%>
+<br>

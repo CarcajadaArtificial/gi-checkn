@@ -1,0 +1,16 @@
+<div class="modal">
+  <div class="modal-content">
+    <%= form_with(model: single_access)  do |f| %>
+    <p class="subtitle">Acceso Directo</p>
+    <div class="field">
+      <p class="label">Tipo de Boleto</p>
+      <%= collection_select(:single_access, :ticket_type_id, TicketType.where(event_id: event.id), :id, :name,{selected: ticket_type.id}, prompt: true) %>
+    </div>
+    <div class="field">
+      <p class="label">Actividad</p>
+      <%= collection_select(:single_access, :activity_id, Activity.where(event_id: event.id), :id, :name, prompt: true) %>
+    </div>
+    <%= f.submit %>
+    <% end %>
+  </div>
+</div>

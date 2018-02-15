@@ -1,1 +1,20 @@
 <h1>Preregister</h1>
+<%= form_with(model: @ticket)  do |f| %>
+<p class="subtitle">Tu informacion</p>
+<div class="field">
+  <p class="label">Nombre</p>
+  <%= f.text_field :fullName %>
+</div>
+<div class="field">
+  <p class="label">Correo Electrónico</p>
+  <%= f.email_field :email %>
+</div>
+<%  @ticket.ticket_type.multiple_accesses.each do |multiple_access|%>
+<div class="field">
+  <p class="label"><%=multiple_access.activity_type.name%></p>
+  <%= f.collection_check_boxes(:activity_ids, Activity.where(activity_type_id: multiple_access.activity_type.id, event_id: @event.id) , :id, :name)  %>
+</div>
+<%end%>
+
+<%= f.submit %>
+<% end %>

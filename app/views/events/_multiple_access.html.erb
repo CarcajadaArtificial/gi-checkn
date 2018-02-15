@@ -1,0 +1,20 @@
+<div class="modal">
+  <div class="modal-content">
+    <%= form_with(model: multiple_access)  do |f| %>
+    <p class="subtitle">Acceso Multiple</p>
+    <div class="field">
+      <p class="label">Tipo de Boleto</p>
+      <%= collection_select(:multiple_access, :ticket_type_id, TicketType.where(event: event), :id, :name,{selected: ticket_type.id}, prompt: true) %>
+    </div>
+    <div class="field">
+      <p class="label">Tipo de actividad</p>
+      <%= collection_select(:multiple_access, :activity_type_id, ActivityType.all, :id, :name, prompt: true) %>
+    </div>
+    <div class="field">
+      <p class="label">Cantidad de Accesos</p>
+      <%= f.number_field :amount %>
+    </div>
+    <%= f.submit %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module MultipleAccessesHelper
+end

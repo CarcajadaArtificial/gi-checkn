@@ -1,0 +1,39 @@
+<div class="modal">
+  <div class="modal-content">
+    <%= form_with(model: activity)  do |f| %>
+    <p class="subtitle">Información del evento</p>
+    <div class="field">
+      <p class="label">Nombre</p>
+      <%= f.text_field :name %>
+    </div>
+    <% if activity.new_record?%>
+    <div class="field">
+      <p class="label">Tipo de Actividad</p>
+      <%= collection_select(:activity, :activity_type_id, ActivityType.all, :id, :name,{:selected => activity.activity_type.id} prompt: true) %>
+    </div>
+    <%end%>
+    <div class="field">
+      <p class="label">Descripción</p>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <p class="label">Ubicacion</p>
+      <%= f.text_field :location %>
+    </div>
+    <div class="field">
+      <p class="label">Ponente</p>
+      <%= f.text_field :host %>
+    </div>
+    <p class="subtitle">Fecha</p>
+    <div class="field">
+      <p class="label">Dia</p>
+      <%= f.date_select :date %>
+    </div>
+    <div class="field">
+      <p class="label">Hora</p>
+      <%= f.time_select :time %>
+    </div>
+    <%= f.submit %>
+    <% end %>
+  </div>
+</div>

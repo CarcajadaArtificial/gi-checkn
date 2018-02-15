@@ -17,6 +17,9 @@ class EventsController < ApplicationController
                                                 # Description: Updates the information of an assistant,
                                                 #   identified by the ticket's reference.
   def preregister
+    @event = Event.find(params[:id])
+    @ticket = Ticket.find_by!(reference: params[:reference])
+    
   end
                                                 # ======================================================
                                                 # Method: checkout
@@ -74,6 +77,32 @@ class EventsController < ApplicationController
                                                 #   questions, activities and activity types) of an
                                                 #   event.
   def manager
+    @event = Event.find(params[:id])
+    if params[:activity]
+      @activity = Activity.find(params[:activity])
+    else
+      @activity = Activity.new
+    end
+    if params[:ticket_type]
+      @ticket_type = TicketType.find(params[:ticket_type])
+    else
+      @ticket_type = TicketType.new
+    end
+    if params[:single_access]
+      @single_access = SingleAccess.find(params[:single_access])
+    else
+      @single_access = SingleAccess.new
+    end
+    if params[:multiple_access]
+      @multiple_access = MultipleAccess.find(params[:multiple_access])
+    else
+      @multiple_access = MultipleAccess.new
+    end
+    if params[:question]
+      @question = Question.find(params[:question])
+    else
+      @question = Question.new
+    end
   end
                                                 # ======================================================
                                                 # Method: edit
@@ -153,6 +182,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :urlName, :startDate, :endDate, :imageUrl, :mainColor, :color2, :locationCode)
+      params.require(:event).permit(:name, :description, :urlName, :startDate, :endDate, :imageUrl, :mainColor, :color2, :locationCode, :activity_id)
     end
 end

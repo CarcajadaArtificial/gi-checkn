@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tickets, :activities,:ticket_types,:single_accesses,:multiple_accesses, :questions
   # Event Pages
   get 'event/new',                to: 'events#new',           as: 'event_new'
   get 'events/:id',               to: 'events#show',          as: 'event_home'

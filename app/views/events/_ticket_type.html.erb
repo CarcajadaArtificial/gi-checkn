@@ -1,0 +1,24 @@
+<div class="modal">
+  <div class="modal-content">
+    <%= form_with(model: ticket_type)  do |f| %>
+    <p class="subtitle">Tipo de Boleto</p>
+    <div class="field">
+      <p class="label">Nombre</p>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <p class="label">Descripción</p>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <p class="label">Precio</p>
+      <%= f.number_field :price, class: :text_field, step: 0.01 %>
+    </div>
+    <div class="field">
+      <p class="label">Cantidad de Boletos</p>
+      <%= f.number_field :max_tickets, class: :text_field, step: 1 %>
+    </div>
+    <%= f.submit %>
+    <% end %>
+  </div>
+</div>

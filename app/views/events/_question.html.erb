@@ -1,0 +1,16 @@
+<div class="modal">
+  <div class="modal-content">
+    <%= form_with(model: question)  do |f| %>
+    <p class="subtitle">Pregunta</p>
+    <div class="field">
+      <p class="label">Tipo de Boleto</p>
+      <%= collection_select(:question, :ticket_type_id, TicketType.where(event_id: event.id), :id, :name,{:selected => ticket_type.id}, prompt: true) %>
+    </div>
+    <div class="field">
+      <p class="label">Enunciado:</p>
+      <%= f.text_field :sentence %>
+    </div>
+    <%= f.submit %>
+    <% end %>
+  </div>
+</div>
