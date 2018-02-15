@@ -9,12 +9,6 @@
   </head>
 
   <body>
-    <div class="modal-space dissapear">
-      <div class="modal">
-        <%= render 'events/partials/forms/event', event: Event.find(1) %>
-      </div>
-      <a id="modal_close"><i class="material-icons">close</i></a>
-    </div>
     <%= yield %>
   </body>
 </html>
