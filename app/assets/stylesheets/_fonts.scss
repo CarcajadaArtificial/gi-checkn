@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import "_colors.scss";
 @import "_breakpoints.scss";
+@import "_flex.scss";
 
 * {
   font-family: 'Varela Round';
@@ -53,6 +54,16 @@ main, div.modal{
     @include breakpoint_byRange(tin, sma){
       font-size: 1.2rem;
     };
+  }
+
+  div.textBlock{
+    width: 70%;
+    @include flex(col, cen, sta);
+
+    p.text{
+      width: 100%;
+
+    }
   }
 
   p.description{
