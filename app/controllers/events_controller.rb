@@ -18,8 +18,9 @@ class EventsController < ApplicationController
                                                 #   identified by the ticket's reference.
   def preregister
     @event = Event.find(params[:id])
-    @ticket = Ticket.find_by!(reference: params[:reference])
-    
+    if params[:reference]
+      @ticket = Ticket.find_by!(reference: params[:reference])
+    end
   end
                                                 # ======================================================
                                                 # Method: checkout

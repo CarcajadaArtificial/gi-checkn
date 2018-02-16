@@ -8,35 +8,81 @@ main.dashboard{
   @include flex(col, cen, sta);
 
   div.manager{
-    width: 100%;
-    @include flex(col, cen, sta);
+
+    .button{
+      margin-left: 2rem;
+    }
 
     div.container{
-      width: 90vw;
+      width: 100vw;
+      @include flex(col, cen, sta);
 
       table{
-        width: 100%;
-        margin: 0 auto;
+        text-align: center;
+        border-spacing: 0px;
         table-layout: fixed;
-        @include flex(col, sta, cen);
-        background-color: $apple-xl;
 
-        td,th{
-          font-size: 0.8rem;
-          padding-right: 0.5rem;
-          text-align: center;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          display: inline-block;
-          width: 100px;
+        tr.jump{
+          div.cell{
+            margin-top: 2rem;
+          }
+        }
+        tr{
+
+          .material-icons{
+            color: $snow;
+
+            &.link{
+              color: $cucumber;
+            }
+          }
+
+
+          &:hover{
+            div.cell{
+              background-color: $platinum-l;
+            }
+
+            .material-icons{
+              color: $carbon;
+
+              &.link{
+                color: $cucumber;
+              }
+            }
+
+          }
         }
 
-        tr{
-          padding-bottom: 1rem;
+        div.cell{
+          // background-color: $apple-xl;
+          height: 2rem;
+          @include flex(col, cen, cen);
+          width: 100%;
+        }
+
+        .small{
+          div.cell{
+            width: 100px;
+          }
+        }
+
+        .icon{
+          div.cell{
+            width: 30px;
+          }
+        }
+
+        .big{
+          div.cell{
+            @include flex(col, sta, cen);
+            text-align: left;
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+          }
         }
       }
-
     }
   }
 

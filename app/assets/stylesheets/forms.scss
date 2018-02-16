@@ -18,11 +18,12 @@ main.forms, div.modal{
     div.field{
       margin-bottom: 1rem;
       width: 250px;
+      @include flex(col, sta, sta);
       @include breakpoint_byRange(tin, sma){
         width: 200px;
       }
 
-      input[type="text"]{
+      input[type="text"], input[type="email"]{
         height: 1.5rem;
         padding-left: 0.5rem;
         border-bottom: 2px solid $carbon;
@@ -47,7 +48,17 @@ main.forms, div.modal{
         }
       }
 
+      div.checkbox{
+        margin-bottom: 0.2rem;
+        @include flex(row, cen, cen);
+
+        input[type="checkbox"]{
+          margin-right: 0.5rem;
+        }
+      }
     }
+
+
 
     div.record{
       width: 50%;

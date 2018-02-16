@@ -1,22 +1,56 @@
-<%= render 'events/partials/nav/secondary' %>
-<h1>Preregister</h1>
-<%= form_with(model: @ticket)  do |f| %>
-<p class="subtitle">Tu informacion</p>
-<div class="field">
-  <p class="label">Nombre</p>
-  <%= f.text_field :fullName %>
-</div>
-<div class="field">
-  <p class="label">Correo Electrónico</p>
-  <%= f.email_field :email %>
-</div>
-<%  @ticket.ticket_type.multiple_accesses.each do |multiple_access|%>
-<div class="field">
-  <p class="label"><%=multiple_access.activity_type.name%></p>
-  <%= f.collection_check_boxes(:activity_ids, Activity.where(activity_type_id: multiple_access.activity_type.id, event_id: @event.id) , :id, :name)  %>
-</div>
-<%end%>
-<%= render 'events/partials/nav/secondary' %>
+<% sex_array = [["Masculino", true], ["Femenino", false], ["Prefiero no responder", nil]] %>
 
-<%= f.submit %>
-<% end %>
+<%= render 'events/partials/nav/secondary' %>
+<main class="forms">
+  <div class="container">
+    <p class="title">Preregistro</p>
+
+    <% if params[:reference] %>
+      <%= form_with(model: @ticket)  do |f| %>
+        <div class="field">
+          <p class="label">Nombre</p>
+          <%= f.text_field :fullName %>
+        </div>
+        <div class="field">
+          <p class="label">Correo Electrónico</p>
+          <%= f.email_field :email %>
+        </div>
+        <div class="field">
+          <p class="label">Sexo</p>
+          <%= f.select :sex, options_for_select(sex_array) %>
+        </div>
+        <div class="field">
+          <p class="label">Estado de proveniencia</p>
+          <%= f.text_field :state %>
+        </div>
+        <p class="subtitle">Actividades</p>
+        <% @ticket.ticket_type.multiple_accesses.each do |multiple_access| %>
+          <div class="field">
+            <p class="label"><%=multiple_access.activity_type.name%></p>
+            <%= f.collection_check_boxes(:activity_ids, Activity.where(activity_type_id: multiple_access.activity_type.id, event_id: @event.id) , :id, :name) do |b| %>
+              <div class="checkbox">
+                <%= b.check_box %>
+                <%= b.label %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <%= f.submit "Enviar" %>
+      <% end %>
+
+
+
+
+
+    <% else %>
+      <%= form_tag(preregister_path, :method => "get") do %>
+        <div class="field">
+          <p class="label">Referencia</p>
+          <%= text_field_tag(:reference) %>
+        </div>
+        <%= submit_tag("Search") %>
+      <% end %>
+    <% end %>
+
+  </div>
+</main>

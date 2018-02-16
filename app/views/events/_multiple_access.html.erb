@@ -1,5 +1,5 @@
-<div class="modal">
-  <div class="modal-content">
+<div class="modal-space">
+  <div class="modal">
     <%= form_with(model: multiple_access)  do |f| %>
     <p class="subtitle">Acceso Multiple</p>
     <div class="field">
@@ -17,4 +17,7 @@
     <%= f.submit %>
     <% end %>
   </div>
+  <a id="modal_close">
+    <i class="material-icons">close</i>
+  </a>
 </div>

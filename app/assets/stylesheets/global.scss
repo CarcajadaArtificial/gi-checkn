@@ -39,7 +39,7 @@ div.modal-space{
   width: 100vw;
   height: 100vh;
   @include flex(col, cen, cen);
-  position: absolute;
+  position: fixed;
   background-color: rgba(0,0,0,0.8);
   z-index: 2;
 
@@ -48,6 +48,7 @@ div.modal-space{
     border-radius: 10rem;
     padding: 0.5rem;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    margin-top: 1rem;
   }
 
   div.modal{

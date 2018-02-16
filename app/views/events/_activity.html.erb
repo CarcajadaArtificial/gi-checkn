@@ -1,5 +1,5 @@
-<div class="modal">
-  <div class="modal-content">
+<div class="modal-space">
+  <div class="modal">
     <%= form_with(model: activity)  do |f| %>
     <p class="subtitle">Información del evento</p>
     <div class="field">
@@ -9,7 +9,7 @@
     <% if activity.new_record?%>
     <div class="field">
       <p class="label">Tipo de Actividad</p>
-      <%= collection_select(:activity, :activity_type_id, ActivityType.all, :id, :name,{:selected => activity.activity_type.id} prompt: true) %>
+      <%= collection_select(:activity, :activity_type_id, ActivityType.all, :id, :name,{:selected => activity.activity_type_id}, prompt: true) %>
     </div>
     <%end%>
     <div class="field">
@@ -36,4 +36,7 @@
     <%= f.submit %>
     <% end %>
   </div>
+  <a id="modal_close">
+    <i class="material-icons">close</i>
+  </a>
 </div>

@@ -1,0 +1,188 @@
+<% @event = event %>
+<div class="manager">
+  <div class="container">
+    <p class="title">Actividades</p>
+    <table>
+      <thead>
+        <tr>
+          <th class="big"><div class="cell">Actividad</div></th>
+          <th class="small"><div class="cell">Fecha</div></th>
+          <th class="small"><div class="cell">Hora</div></th>
+          <th class="big"><div class="cell">Ubicacion</div></th>
+          <th class="small"><div class="cell">Cupo</div></th>
+          <th class="big"><div class="cell">Tipo de actividad</div></th>
+          <th class="icon"><div class="cell"></div></th>
+          <th class="icon"><div class="cell"></div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @event.activities.each do |activity| %>
+        <tr>
+          <td class="big"><div class="cell"><%= activity.name %></div></td>
+          <td class="small"><div class="cell"><%= activity.date %></div></td>
+          <td class="small"><div class="cell"><%= activity.time.strftime "%H:%M" %></div></td>
+          <td class="big"><div class="cell"><%= activity.location %></div></td>
+          <td class="small"><div class="cell"><%= activity.capacity %></div></td>
+          <td class="big"><div class="cell"><%= activity.activity_type.name %></div></td>
+          <td class="icon">
+            <div class="cell">
+              <%= link_to(model: "activity", activity: activity.id) do %>
+                <i class="material-icons">settings</i>
+              <% end %>
+            </div>
+          </td>
+          <td class="icon">
+            <div class="cell">
+              <a
+              data-confirm="Confirma que deseas eliminar la actividad"
+              rel="nofollow"
+              data-method="delete"
+              href="/activities/<%= activity.id %>">
+                <i class="material-icons">close</i>
+              </a>
+            </div>
+        </td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+    <%= link_to "Crear Actividad", { model: "activity" }, class: "button" %>
+  </div>
+
+  <div class="container">
+    <p class="title">Tipos de Boleto</p>
+    <table>
+    <% @event.ticket_types.each do |ticket_type| %>
+    <tr class="jump">
+      <th class="big"><div class="cell">Tipo de Boleto: </div></th>
+      <th class="big"><div class="cell"><%=ticket_type.name%></div></th>
+      <th class="small"><div class="cell">Cantidad: </div></th>
+      <th class="small"><div class="cell"><%=ticket_type.max_tickets%></div></th>
+      <th class="small"><div class="cell">Precio: </div></th>
+      <th class="small"><div class="cell"><%=ticket_type.price%></div></th>
+      <td class="icon"><div class="cell">
+        <%= link_to(model: "ticket_type",ticket_type: ticket_type.id) do %>
+          <i class="material-icons">settings</i>
+        <% end %>
+      </div></td>
+      <td class="icon">
+        <div class="cell">
+          <a
+          data-confirm="Confirma que deseas eliminar el acceso directo"
+          rel="nofollow"
+          data-method="delete"
+          href="/ticket_types/<%= ticket_type.id %>">
+            <i class="material-icons">close</i>
+          </a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+        <th>Acceso Directo</th>
+        <th>
+          <%= link_to(model: "single_access", ticket_type: ticket_type.id) do %>
+            <i class="material-icons link">add</i>
+          <% end %>
+        </th>
+    </tr>
+    <% ticket_type.single_accesses.each do |single_access| %>
+      <tr>
+        <td><div class="cell"><%= single_access.activity.name %></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td class="icon">
+          <div class="cell">
+            <%= link_to(model: "single_access",single_access: single_access.id) do %>
+              <i class="material-icons">settings</i>
+            <% end %>
+          </div>
+        </td>
+        <td class="icon">
+          <div class="cell">
+            <a
+            data-confirm="Confirma que deseas eliminar el acceso directo"
+            rel="nofollow"
+            data-method="delete"
+            href="/single_accesses/<%= single_access.id %>">
+              <i class="material-icons">close</i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <th>Acceso Múltiple</th>
+      <th>
+        <%= link_to(model: "multiple_access",ticket_type: ticket_type.id) do %>
+          <i class="material-icons link">add</i>
+        <% end %>
+      </th>
+    </tr>
+    <% ticket_type.multiple_accesses.each do |multiple_access| %>
+      <tr>
+          <td><div class="cell"><%= multiple_access.activity_type.name %></div></td>
+          <td><div class="cell"><%= multiple_access.amount%></div></td>
+          <td><div class="cell"></div></td>
+          <td><div class="cell"></div></td>
+          <td><div class="cell"></div></td>
+          <td><div class="cell"></div></td>
+          <td class="icon"><div class="cell">
+            <%= link_to(model: "multiple_access", multiple_access: multiple_access.id) do %>
+              <i class="material-icons">settings</i>
+            <% end %>
+          </div></td>
+          <td class="icon">
+            <div class="cell">
+              <a
+              data-confirm="Confirma que deseas eliminar el acceso multiple"
+              rel="nofollow"
+              data-method="delete"
+              href="/multiple_accesses/<%= multiple_access.id %>">
+                <i class="material-icons">close</i>
+              </a>
+            </div>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <th>Preguntas</th>
+      <th>
+        <%= link_to(model: "question",ticket_type: ticket_type.id) do %>
+          <i class="material-icons link">add</i>
+        <% end %>
+      </th>
+    </tr>
+    <% ticket_type.questions.each do |question| %>
+      <tr>
+        <td><div class="cell"><%= question.sentence%></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td><div class="cell"></div></td>
+        <td class="icon"><div class="cell">
+          <%= link_to(model: "question", question: question.id) do %>
+            <i class="material-icons">settings</i>
+          <% end %>
+        </div></td>
+        <td class="icon">
+          <div class="cell">
+            <a
+            data-confirm="Confirma que deseas eliminar la pregunta"
+            rel="nofollow"
+            data-method="delete"
+            href="/questions/<%= question.id %>">
+              <i class="material-icons">close</i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    <%end%>
+  <%end%>
+  </table>
+  <%= link_to "Crear Tipo de Boleto", {model: "ticket_type"}, class: "button"%>
+  </div>
+</div>
