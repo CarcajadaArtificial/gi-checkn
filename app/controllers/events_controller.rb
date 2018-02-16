@@ -1,5 +1,9 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  require 'barby'
+  require 'barby/barcode/code_128'
+  require 'barby/outputter/html_outputter'
+
 
                                                 # ======================================================
                                                 # Method: show
@@ -29,6 +33,9 @@ class EventsController < ApplicationController
                                                 # Description: Screen that displays the ticket's barcode
                                                 #   and instructions.
   def checkout
+    @ticket = Ticket.find_by!(reference: params[:reference])
+    barcode = Barby::Code128B.new(@ticket.badgeNumber)
+    @html_barcode = Barby::HtmlOutputter.new(barcode)
   end
                                                 # ======================================================
                                                 # Method: register
