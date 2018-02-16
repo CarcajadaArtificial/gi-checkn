@@ -1,2 +1,19 @@
 <%= render 'events/partials/nav/secondary' %>
-<h1>Checkout</h1>
+<main class="forms">
+  <div class="container center">
+    <p class="title">¡Gracias por preregistrarte <%= "#{@ticket.fullName.partition(" ").first}" %>!</p>
+    <div class="textBlock">
+      <p class="text">
+        Ya recibimos tu información y te hemos enviado un correo a: <strong><%= @ticket.email %></strong>
+      </p>
+      <br>
+      <p class="text">
+        A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
+        necesario para entrar al evento.
+      </p>
+    </div>
+    <p> Placeholder: código de barras</p>
+    <p> Placeholder: Intinerario</p>
+    <%= link_to "Volver", event_home_path, class: "button" %>
+  </div>
+</main>
