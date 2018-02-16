@@ -12,7 +12,7 @@
         necesario para entrar al evento.
       </p>
     </div>
-    <p> Placeholder: código de barras</p>
+    <%= raw @html_barcode.to_html %>
     <p> Placeholder: Intinerario</p>
     <%= link_to "Volver", event_home_path, class: "button" %>
   </div>

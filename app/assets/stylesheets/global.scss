@@ -17,6 +17,21 @@ a{
   text-decoration: none;
 }
 
+table.barby-barcode {
+  border-spacing: 0;
+  margin: 2rem 0;
+}
+tr.barby-row {
+
+}
+td.barby-cell {
+  width: 2px;
+  height: 100px;
+}
+td.barby-cell.on {
+  background: $carbon;
+}
+
 img.logo{
   height: 2.5rem;
   margin: 1rem 0;
