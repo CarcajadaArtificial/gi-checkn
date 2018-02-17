@@ -48,12 +48,12 @@ class TicketsController < ApplicationController
           @ticket.status = "sold"
           @ticket.rollNumber = @ticket.create_rollNumber
           @ticket.save
-          TicketMailer.sale_email(@ticket).deliver_later
+          TicketMailer.sale_email(@ticket).deliver_now
           format.html { redirect_to action: "sale", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
         when "sold"
           @ticket.status = "preregistered"
           @ticket.save
-          TicketMailer.preregister_email(@ticket).deliver_later
+          TicketMailer.preregister_email(@ticket).deliver_now
           format.html { redirect_to action: "checkout", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
         end
       else
