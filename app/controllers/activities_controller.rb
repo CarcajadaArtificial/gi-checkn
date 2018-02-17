@@ -3,38 +3,37 @@ class ActivitiesController < ApplicationController
 
   # GET /activities
   # GET /activities.json
-  def index
-    @activities = Activity.all
-  end
-
-  # GET /activities/1
-  # GET /activities/1.json
-  def show
-  end
-
-  # GET /activities/new
-  def new
-    @activity = Activity.new
-  end
-
-  # GET /activities/1/edit
-  def edit
-    @activity = Activity.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
+  # def index
+  #   @activities = Activity.all
+  # end
+  #
+  # # GET /activities/1
+  # # GET /activities/1.json
+  # def show
+  # end
+  #
+  # # GET /activities/new
+  # def new
+  #   @activity = Activity.new
+  # end
+  #
+  # # GET /activities/1/edit
+  # def edit
+  #   @activity = Activity.find(params[:id])
+  #   respond_to do |format|
+  #     format.js
+  #   end
+  # end
 
   # POST /activities
   # POST /activities.json
   def create
     @activity = Activity.new(activity_params)
-    @activity.event_id = 1
-    @activity.valid?
-    puts @activity.errors.full_messages
+    @activity.event_id = current_user.id
     respond_to do |format|
       if @activity.save
-        format.html {  redirect_to "/events/" + @activity.event.urlName + "/manager", notice: 'Activity was successfully created.' }
+        format.html {redirect_to "/events/" + @activity.event.urlName + "/manager", notice: 'Activity was successfully created.',turbolinks: false
+        }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }

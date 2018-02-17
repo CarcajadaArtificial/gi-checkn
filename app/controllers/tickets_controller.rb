@@ -26,9 +26,6 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
-    @ticket.reference = Ticket.create_reference
-    @ticket.badgeNumber = Ticket.create_badgeNumber
-    @ticket.rollNumber = @ticket.create_rollNumber
     event = @ticket.ticket_type.event
     respond_to do |format|
       if @ticket.save
@@ -46,11 +43,21 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update(ticket_params)
-        format.html { redirect_to root_path, notice: 'Ticket was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ticket }
+        case @ticket.status
+        when "new"
+          @ticket.status = "sold"
+          @ticket.rollNumber = @ticket.create_rollNumber
+          @ticket.save
+          TicketMailer.sale_email(@ticket).deliver_later
+          format.html { redirect_to action: "sale", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
+        when "sold"
+          @ticket.status = "preregistered"
+          @ticket.save
+          TicketMailer.preregister_email(@ticket).deliver_later
+          format.html { redirect_to action: "checkout", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        format.html { redirect_to action: "preregister", controller: "events", id: @ticket.ticket_type.event.urlName, reference: @ticket.reference }
       end
     end
   end

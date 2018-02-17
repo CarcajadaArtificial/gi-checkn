@@ -27,6 +27,18 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.office365.com',
+    port:587,
+    domain: 'checkn.mx',
+    authentication: 'login',
+    user_name:'no-reply@checkn.mx',
+    password:'@TdFwR9AM2g',
+    enable_starttls_auto: true
+  }
+
+
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
