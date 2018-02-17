@@ -1,3 +1,7 @@
 <div class="login">
-  <%= link_to('Staff', new_user_session_path, {class: "button"}) %>
+  <% if user_signed_in? %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete, {class: "button"}) %>
+  <% else %>
+    <%= link_to('Staff', new_user_session_path, {class: "button"})  %>
+  <% end %>
 </div>
