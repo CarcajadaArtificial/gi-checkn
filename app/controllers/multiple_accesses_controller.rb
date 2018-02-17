@@ -3,23 +3,23 @@ class MultipleAccessesController < ApplicationController
 
   # GET /multiple_accesses
   # GET /multiple_accesses.json
-  def index
-    @multiple_accesses = MultipleAccess.all
-  end
-
-  # GET /multiple_accesses/1
-  # GET /multiple_accesses/1.json
-  def show
-  end
-
-  # GET /multiple_accesses/new
-  def new
-    @multiple_access = MultipleAccess.new
-  end
-
-  # GET /multiple_accesses/1/edit
-  def edit
-  end
+  # def index
+  #   @multiple_accesses = MultipleAccess.all
+  # end
+  #
+  # # GET /multiple_accesses/1
+  # # GET /multiple_accesses/1.json
+  # def show
+  # end
+  #
+  # # GET /multiple_accesses/new
+  # def new
+  #   @multiple_access = MultipleAccess.new
+  # end
+  #
+  # # GET /multiple_accesses/1/edit
+  # def edit
+  # end
 
   # POST /multiple_accesses
   # POST /multiple_accesses.json

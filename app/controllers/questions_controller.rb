@@ -3,23 +3,23 @@ class QuestionsController < ApplicationController
 
   # GET /questions
   # GET /questions.json
-  def index
-    @questions = Question.all
-  end
-
-  # GET /questions/1
-  # GET /questions/1.json
-  def show
-  end
-
-  # GET /questions/new
-  def new
-    @question = Question.new
-  end
-
-  # GET /questions/1/edit
-  def edit
-  end
+  # def index
+  #   @questions = Question.all
+  # end
+  #
+  # # GET /questions/1
+  # # GET /questions/1.json
+  # def show
+  # end
+  #
+  # # GET /questions/new
+  # def new
+  #   @question = Question.new
+  # end
+  #
+  # # GET /questions/1/edit
+  # def edit
+  # end
 
   # POST /questions
   # POST /questions.json

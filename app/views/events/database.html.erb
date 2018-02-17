@@ -1,3 +1,25 @@
 <%= render 'events/partials/nav/main' %>
-<%= render 'events/partials/nav/dashboard' %> 
+<%= render 'events/partials/nav/dashboard' %>
 <h1>Database</h1>
+<table id= "database">
+  <thead>
+    <tr>
+      <th>Referencia</th>
+      <th>Nombre</th>
+      <th>Correo Electronico</th>
+      <th>Tipo de Boleto</th>
+      <th>Estatus</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tickets.each do |ticket| %>
+    <tr>
+      <td><%= ticket.reference %></td>
+      <td><%= ticket.fullName %></td>
+      <td><%= ticket.email %></td>
+      <td><%= ticket.ticket_type.name %></td>
+      <td><%= ticket.status %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

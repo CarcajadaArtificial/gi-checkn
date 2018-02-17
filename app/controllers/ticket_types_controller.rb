@@ -3,23 +3,23 @@ class TicketTypesController < ApplicationController
 
   # GET /ticket_types
   # GET /ticket_types.json
-  def index
-    @ticket_types = TicketType.all
-  end
-
-  # GET /ticket_types/1
-  # GET /ticket_types/1.json
-  def show
-  end
-
-  # GET /ticket_types/new
-  def new
-    @ticket_type = TicketType.new
-  end
-
-  # GET /ticket_types/1/edit
-  def edit
-  end
+  # def index
+  #   @ticket_types = TicketType.all
+  # end
+  #
+  # # GET /ticket_types/1
+  # # GET /ticket_types/1.json
+  # def show
+  # end
+  #
+  # # GET /ticket_types/new
+  # def new
+  #   @ticket_type = TicketType.new
+  # end
+  #
+  # # GET /ticket_types/1/edit
+  # def edit
+  # end
 
   # POST /ticket_types
   # POST /ticket_types.json

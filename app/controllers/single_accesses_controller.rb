@@ -3,23 +3,23 @@ class SingleAccessesController < ApplicationController
 
   # GET /single_accesses
   # GET /single_accesses.json
-  def index
-    @single_accesses = SingleAccess.all
-  end
-
-  # GET /single_accesses/1
-  # GET /single_accesses/1.json
-  def show
-  end
-
-  # GET /single_accesses/new
-  def new
-    @single_access = SingleAccess.new
-  end
-
-  # GET /single_accesses/1/edit
-  def edit
-  end
+  # def index
+  #   @single_accesses = SingleAccess.all
+  # end
+  #
+  # # GET /single_accesses/1
+  # # GET /single_accesses/1.json
+  # def show
+  # end
+  #
+  # # GET /single_accesses/new
+  # def new
+  #   @single_access = SingleAccess.new
+  # end
+  #
+  # # GET /single_accesses/1/edit
+  # def edit
+  # end
 
   # POST /single_accesses
   # POST /single_accesses.json
