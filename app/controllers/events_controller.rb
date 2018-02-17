@@ -12,7 +12,7 @@ class EventsController < ApplicationController
                                                 # Description: Display all the information of an event.
   def show
     @event = Event.find(params[:id])
-    @activities_by_day = @event.activities.any? ? @event.activities_by_day : []
+    # @activities_by_day = @event.activities.any? ? @event.activities_by_day : []
   end
                                                 # ======================================================
                                                 # Method: preregister
