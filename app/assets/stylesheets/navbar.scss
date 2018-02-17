@@ -44,3 +44,15 @@ nav{
     }
   }
 }
+
+div.login{
+  position: fixed;
+  display: inline-block;
+  right: 1rem;
+  top: 1.5rem;
+
+  .button{
+    color: $carbon;
+    background-color: white;
+  }
+}

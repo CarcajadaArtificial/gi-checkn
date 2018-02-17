@@ -1,1 +1,20 @@
-<h1>Hola</h1>
+<%= render 'events/partials/nav/main' %>
+<%= render 'events/partials/nav/login' %>
+<main class="home">
+  <header></header>
+  <div class="container">
+    <p class="title">Busca una gran experiencia</p>
+    <div class="events">
+      <% @events.each do |e| %>
+        <div class="event">
+          <div class="image" style="background-image: url('<%= e.imageUrl %>')"></div>
+          <p class="event-title"><%= e.name %></p>
+          <div class="dates">
+            <p class="date"><%= e.startDate.strftime('%-d-%b') %></p>
+            <p class="date"><%= e.endDate.strftime('%-d-%b') %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>
