@@ -1,0 +1,99 @@
+@import "_breakpoints.scss";
+@import "_colors.scss";
+@import "_flex.scss";
+
+main.home{
+  background-color: $platinum-l;
+  padding-bottom: 3rem;
+
+  header{
+    width: 100vw;
+    background-image: url("https://static.pexels.com/photos/6385/hands-people-woman-meeting.jpg");
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - 79px);
+    @include breakpoint_byRange(tin, sma){
+      height: calc(70vh - 55px);
+    }
+  }
+
+  div.container{
+    width: 80vw;
+    margin: -9rem auto 1rem auto;
+    @include breakpoint_byRange(tin, sma){
+      width: 90vw;
+    }
+  }
+
+  div.events{
+    width: 100%;
+    @include flex(row, cen, aro, wra);
+
+    div.event{
+      width: 260px;
+      margin: 0 1rem 2rem 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      border-radius: 10px;
+
+      div.image{
+        width: 100%;
+        height: 130px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 8px 8px 0 0;
+      }
+
+      p.event-title{
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.5rem;
+      }
+
+      div.dates{
+        @include flex(row, cen, aro);
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  p.title{
+    padding: 2rem;
+    font-size: 3rem;
+    @include breakpoint_byRange(tin, sma){
+      font-size: 2rem;
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+main.login{
+  margin-top: 3rem;
+  @include flex(col, cen, sta);
+
+  form{
+    margin-top: 2rem;
+  }
+
+  input[type="text"], input[type="email"], input[type="number"], input[type="password"]{
+    height: 1.5rem;
+    padding-left: 0.5rem;
+    border-bottom: 2px solid $carbon;
+    font-size: 1rem;
+    width: calc(100% - 0.5rem);
+
+    &:focus{
+      outline: none;
+      border-bottom: 2px solid $cucumber;
+    }
+  }
+  p.label{
+    font-size: 0.8rem;
+    color: $titanium-d;
+    margin-bottom: 0.2rem;
+  }
+  .actions{
+    width: 100%;
+    @include flex(row, cen, cen);
+  }
+}
