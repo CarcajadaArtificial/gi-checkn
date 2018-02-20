@@ -150,7 +150,7 @@ class EventsController < ApplicationController
                                                 #   database of tickets.
   def database
     if current_user
-      @tickets= Event.find(params[:id]).tickets.where(status: "sold")
+      @tickets= Event.find(params[:id]).tickets.where.not(status: "new")
     else
       redirect_to root_path
     end
