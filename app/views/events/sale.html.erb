@@ -14,7 +14,6 @@
         <p class="label">Correo electrónico</p>
         <%= f.text_field :email %>
       </div>
-      <%=@ticket.reference%>
       <%= f.collection_select  :ticket_type_id, @ticket_types, :id, :name, {selected: @selected_ticket_type}%>
       <%= f.submit "Create" %>
       <% if Ticket.where(reference: params[:reference]).present? %>

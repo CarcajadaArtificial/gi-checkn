@@ -2,21 +2,21 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <style>
+    <style>
     /* Reset */
     @import url('https://fonts.googleapis.com/css?family=Varela+Round');
     *{ margin: 0; padding: 0; border: 0; }
     body{ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     a{ text-decoration: none; }
     /* Structure */
-    table{ width: 100vw; }
+    table{ width: 100%; }
     .middle{ width: 60%; }
     .header{ height: 55px; background-color: #fff; }
     .container{ background-color: #fff; }
     .logo{ width: 200px; height: 200px; border-radius: 100px; margin: 0 auto 2rem auto; background-position: center; background-size: cover;}
+    .checkn > img { width: 400px; height: 105px; }
     .space{ height: 2rem; }
-    .TEMPORAL_BARCODE{ width: 300px; height: 100px; background-color: #161519; margin: 0 auto 1rem auto;}
+    img{ width: 300px; height: 100px; background-color: #161519; margin: 0 auto 1rem auto;}
     /* Text */
     *{ font-family: 'Varela Round', sans-serif; text-align: center; color: #161519;}
     p.title{ font-size: 2rem; font-weight: 600; margin: 2rem 0 1rem 0; }
@@ -32,61 +32,62 @@
     }
     /* Reset values with ruby */
     .button, table, .logo{ background-color: #1dda78; }
-    .logo{ background-image: url(<%= @ticket.event.imageUrl%>); }
-  </style>
-    <table cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="auto" class="header"></td>
-        <td class="header middle">
-          <p>checkn</p>
-        </td>
-        <td width="auto" class="header"></td>
-      </tr>
-      <tr>
-        <td width="auto" class="space"></td>
-        <td class="space middle"></td>
-        <td width="auto" class="space"></td>
-      </tr>
-      <!-- Saludo -->
-      <tr>
-        <td width="auto"></td>
-        <td class="container middle">
-          <p class="title">¡Hola <%= @ticket.fullName.split.first%>!</p>
-          <p class="subtitle">¡Gracias por inscribirte a <%=@ticket.event.name%>!</p>
-          <div class="logo">
-
-          </div>
-        </td>
-        <td width="auto"></td>
-      </tr>
-      <!-- Código de barras -->
-      <tr>
-        <td width="auto"></td>
-        <td class="container middle">
-          <p class="textbox">
-            A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
-            necesario para entrar al evento.
-          </p>
-          <div class="TEMPORAL_BARCODE">
-          <%= image_tag(attachments['barcode.png'].url) %></div>
-        </td>
-        <td width="auto"></td>
-      </tr>
-      <!-- Actividades -->
-      <tr>
-        <td width="auto"></td>
-        <td class="container middle">
-          <p class="title">Éste es tu horario: </p>
-          <%@activities.each do |activity|%>
-            <p class="subtitle activity"><%=activity.name%></p>
-            <p class="label"><%=activity.date%>, <%=activity.time.strftime "%H:%M"%>, <%=activity.location%></p>
-          <%end%>
-        </td>
-        <td width="auto"></td>
-      </tr>
-      <tr>
-        <td width="auto" class="space"></td>
-        <td class="space middle"></td>
-        <td width="auto" class="space"></td>
-      </tr>
-    </table>
+    .logo{ background-image: url("<%= @ticket.event.imageUrl%>"); }
+    </style>
+  </head>
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="auto" class="space"></td>
+      <td class="space middle"></td>
+      <td width="auto" class="space"></td>
+    </tr>
+    <!-- Saludo -->
+    <tr>
+      <td width="auto"></td>
+      <td class="container middle">
+        <p class="title">¡Hola <%= @ticket.fullName.split.first%>!</p>
+        <p class="subtitle">¡Gracias por inscribirte a <%=@ticket.event.name%>!</p>
+        <div class="logo"></div>
+      </td>
+      <td width="auto"></td>
+    </tr>
+    <!-- Código de barras -->
+    <tr>
+      <td width="auto"></td>
+      <td class="container middle">
+        <p class="textbox">
+          A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
+          necesario para entrar al evento.
+        </p>
+        <%= image_tag(attachments['barcode.png'].url) %>
+      </td>
+      <td width="auto"></td>
+    </tr>
+    <!-- Actividades -->
+    <tr>
+      <td width="auto"></td>
+      <td class="container middle">
+        <p class="title">Éste es tu horario: </p>
+        <%@activities.each do |activity|%>
+          <p class="subtitle activity"><%=activity.name%></p>
+          <p class="label"><%=activity.date%>, <%=activity.time.strftime "%H:%M"%>, <%=activity.location%></p>
+        <%end%>
+      </td>
+      <td width="auto"></td>
+    </tr>
+    <tr>
+      <td width="auto"></td>
+      <td class="container middle">
+        <div style="background: transparent; margin: 40px auto;" class="checkn" align="center">
+          <%= image_tag(attachments['logo.png'].url) %>
+        </div>
+        <!-- <%= image_tag("logo-black.svg", alt: "Checkn Logo", class: "checkn") %> -->
+      </td>
+      <td width="auto"></td>
+    </tr>
+    <tr>
+      <td width="auto" class="space"></td>
+      <td class="space middle"></td>
+      <td width="auto" class="space"></td>
+    </tr>
+  </table>
