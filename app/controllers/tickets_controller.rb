@@ -55,6 +55,10 @@ class TicketsController < ApplicationController
           @ticket.save
           TicketMailer.preregister_email(@ticket).deliver_now
           format.html { redirect_to action: "checkout", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
+        when "preregistered"
+          @ticket.save
+          TicketMailer.preregister_email(@ticket).deliver_now
+          format.html { redirect_to action: "checkout", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
         end
       else
         format.html { redirect_to action: "preregister", controller: "events", id: @ticket.ticket_type.event.urlName, reference: @ticket.reference }

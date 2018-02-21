@@ -5,4 +5,9 @@ class Activity < ApplicationRecord
   has_many :attendance
   has_many :ticket_types, through: :single_access
   has_many :tickets, through: :attendance
+
+  def name_with_host
+    "#{name} #{host}"
+  end
+
 end

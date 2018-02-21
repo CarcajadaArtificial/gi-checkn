@@ -47,10 +47,23 @@
     <td class="container middle">
       <p class="title">¡Hola <%= @ticket.fullName.split.first%>!</p>
       <p class="subtitle">¡Gracias por comprar un boleto para <%= @ticket.event.name%>!</p>
+      <p class="subtitle">Haz click en el botón para escoger tus actividades y terminar tu preregistro:</p>
       <div class="logo"></div>
       <a href="app.checkn.mx/events/<%=@ticket.event.urlName%>/preregister?reference=<%=@ticket.reference%>" class="button">Inscripcion</a>
     </td>
     <td width="auto"></td>
+  </tr>
+  <tr>
+    <td width="auto" class="space"></td>
+    <td class="container middle"></td>
+    <td width="auto" class="space"></td>
+  </tr>
+  <tr>
+    <td width="auto"></td>
+    <td class="container middle">
+      <p> Si no puedes usar el botón, copia y pega el siguiente enlace en el explorador:</p>
+      <p> app.checkn.mx/events/<%=@ticket.event.urlName%>/preregister?reference=<%=@ticket.reference%></p>
+    </td>
   </tr>
   <tr>
     <td width="auto" class="space"></td>
