@@ -34,6 +34,7 @@ class EventsController < ApplicationController
                                                 #   and instructions.
   def checkout
     @ticket = Ticket.find_by!(reference: params[:reference])
+    @activities = @ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
     barcode = Barby::Code128B.new(@ticket.badgeNumber)
     @html_barcode = Barby::HtmlOutputter.new(barcode)
   end
@@ -57,7 +58,7 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       @ticket_types = @event.available_ticket_types
       @selected_ticket_type = params[:ticket_type] ? params[:ticket_type] : @ticket_types.first
-      @ticket = Ticket.where(ticket_type: TicketType.where(event: @event, status: "default").first).first
+      @ticket = Ticket.find_by(rollNumber: @event.tickets.where(status: "new").minimum(:rollNumber))
 
     else
       redirect_to root_path

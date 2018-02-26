@@ -46,7 +46,6 @@ class TicketsController < ApplicationController
         case @ticket.status
         when "new"
           @ticket.status = "sold"
-          @ticket.rollNumber = @ticket.create_rollNumber
           @ticket.save
           TicketMailer.sale_email(@ticket).deliver_now
           format.html { redirect_to action: "sale", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
