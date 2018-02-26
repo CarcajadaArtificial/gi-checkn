@@ -4,7 +4,7 @@ class Ticket < ApplicationRecord
   has_many :questions, through: :answer
   belongs_to :ticket_type
   has_one :event, through: :ticket_type
-  validate :activities_must_be_available, on: :update
+  #validate :activities_must_be_available, on: :update
   #validate :ticket_type_must_be_available, on: :create
 
   def activities_must_be_available
