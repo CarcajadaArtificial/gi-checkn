@@ -47,7 +47,7 @@ class EventsController < ApplicationController
                                                 #   or for an activity in particular.
   def register
     if current_user
-      @activities = Event.find(params[:id]).activities.order(:activity_type_id)
+      @activities = Event.find(params[:id]).activities.order(:activity_type_id, :name)
       if params[:ticket]
         @ticket, @status = Ticket.register(params[:ticket], params[:activity_id], params[:id])
       end

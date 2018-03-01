@@ -66,7 +66,11 @@ class Ticket < ApplicationRecord
       activity = Activity.find(activity_id)
       event = Event.find(event_id)
       if activity.activity_type.public
-        Attendance.create(activity: activity, ticket: ticket, attended: true)
+        if ticket.activities.exists?(activity.id)
+          Attendance.where(activity: activity, ticket: ticket).update(attended: true)
+        else
+          Attendance.create(activity: activity, ticket: ticket, attended: true)
+        end
         return ticket, "success"
       else
         if ticket.activities.exists?(activity.id)

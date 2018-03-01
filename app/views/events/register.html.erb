@@ -2,12 +2,15 @@
 <% if @status == "not_found" %>
   <%= render 'events/partials/modals/register/notFound' %>
 <% end %>
+<% if @status == "not_authorized" %>
+  <%= render 'events/partials/modals/register/notAuthorized' %>
+<% end %>
 <%= render 'events/partials/nav/main' %>
 <main class="forms">
   <div class="container">
     <p class="title">Registro</p>
     <p class="textbox">
-      Hola, staff-name, a continuación deberás ingresar el código de barras del boleto.
+      Hola, a continuación deberás ingresar el código de barras del boleto.
     </p>
     <!-- ACTIVITY REGISTRANDO -->
     <!-- FORMA DE REGISTER -->
@@ -48,10 +51,12 @@
         <p class="subtitle">Actividades</p>
         <!-- INFORMACIÓN DE ACTIVITIES -->
         <% @ticket.activities.each do |activity| %>
-          <div class="dataField">
-            <p class="label"><%= activity.activity_type.name %></p>
-            <p class="data"><%= activity.name %></p>
-          </div>
+          <%if !activity.activity_type.public %>
+            <div class="dataField">
+              <p class="label"><%= activity.activity_type.name %></p>
+              <p class="data"><%= activity.name %></p>
+            </div>
+          <%end%>
         <% end %>
       </div>
     <% else %>
