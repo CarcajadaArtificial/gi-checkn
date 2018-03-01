@@ -14,6 +14,10 @@
     </div>
     <%= raw @html_barcode.to_html %>
     <p>Intinerario:</p>
+    <%@activities.each do |activity|%>
+      <p class="subtitle activity"><%=activity.name%></p>
+      <p class="label"><%=activity.date%>, <%=activity.time.strftime "%H:%M"%>, <%=activity.location%></p>
+    <%end%>
     <%= link_to "Volver", event_home_path, class: "button" %>
   </div>
 </main>

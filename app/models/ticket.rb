@@ -4,7 +4,18 @@ class Ticket < ApplicationRecord
   has_many :questions, through: :answer
   belongs_to :ticket_type
   has_one :event, through: :ticket_type
+  #validate :activities_must_be_available, on: :update
   #validate :ticket_type_must_be_available, on: :create
+
+  def activities_must_be_available
+    if activities.any?
+      activities.each do |a|
+        if a.tickets.count >= a.capacity
+          errors[:base] << "Lo sentimos, uno de las actividades que elegiste está llena."
+        end
+      end
+    end
+  end
 
   def ticket_type_must_be_available
     if ticket_type.tickets.count >= ticket_type.max_tickets
@@ -13,14 +24,16 @@ class Ticket < ApplicationRecord
   end
 
   def self.create_tickets(event)
+    a = 1
     event.max_tickets.times{
       ticket = Ticket.new
       ticket.status = "new"
       ticket.ticket_type = TicketType.where(event_id: event.id, status: "default").first
       ticket.reference = create_reference
       ticket.badgeNumber = create_badgeNumber
-      ticket.rollNumber = 0
+      ticket.rollNumber = a
       ticket.save
+      a = a + 1
     }
   end
 
