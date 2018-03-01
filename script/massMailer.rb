@@ -19,10 +19,10 @@
 tickets = Event.find(2).tickets
 a = 1
 tickets.each do |ticket|
-  if a > 105 && ticket.status = "preregistered"
-    a = a + 1 
+  if a > 105 && ticket.status == "preregistered"
     sleep 1
     puts ticket.email
     TicketMailer.reminder_email(ticket).deliver_now
   end
+  a = a + 1
 end
