@@ -34,6 +34,7 @@ class EventsController < ApplicationController
                                                 #   and instructions.
   def checkout
     @ticket = Ticket.find_by!(reference: params[:reference])
+    @activities = @ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
     barcode = Barby::Code128B.new(@ticket.badgeNumber)
     @html_barcode = Barby::HtmlOutputter.new(barcode)
   end
@@ -45,6 +46,13 @@ class EventsController < ApplicationController
                                                 #   event. Might be registering for the event in general
                                                 #   or for an activity in particular.
   def register
+    if current_user
+      if params[:ticket] != ""
+        @status = Ticket.register(params[:ticket], params[:activity_id], params[:id])
+      end
+    else
+      redirect_to new_user_session_path
+    end
   end
                                                 # ======================================================
                                                 # Method: sale
@@ -57,7 +65,7 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       @ticket_types = @event.available_ticket_types
       @selected_ticket_type = params[:ticket_type] ? params[:ticket_type] : @ticket_types.first
-      @ticket = Ticket.where(ticket_type: TicketType.where(event: @event, status: "default").first).first
+      @ticket = Ticket.find_by(rollNumber: @event.tickets.where(status: "new").minimum(:rollNumber))
 
     else
       redirect_to root_path
@@ -150,7 +158,7 @@ class EventsController < ApplicationController
                                                 #   database of tickets.
   def database
     if current_user
-      @tickets= Event.find(params[:id]).tickets.where(status: "sold")
+      @tickets= Event.find(params[:id]).tickets.where.not(status: "new")
     else
       redirect_to root_path
     end

@@ -13,13 +13,30 @@ class TicketMailer < ApplicationMailer
     mail(to: ticket.email, subject: asunto)
   end
 
+  def reminder_email(ticket)
+    @ticket = ticket
+    barcode = Barby::Code128B.new(ticket.badgeNumber)
+    png = Barby::PngOutputter.new(barcode).to_png(margin:0, height: 200, xdim: 3)
+    attachments.inline["barcode.png"] = png
+    attachments.inline["logo.png"] = File.read("#{Rails.root}/app/assets/images/logo.png")
+    if [5, 7, 8, 10, 15, 16].include?(@ticket.ticket_type_id)
+      attachments["visitas.jpg"] = File.read("#{Rails.root}/app/assets/images/visitas.jpg")
+    end
+    @activities = ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
+    asunto = "¡Te esperamos mañana en el #{ticket.event.name}!"
+    mail(to: ticket.email, subject: asunto)
+  end
+
   def preregister_email(ticket)
     @ticket = ticket
     barcode = Barby::Code128B.new(ticket.badgeNumber)
     png = Barby::PngOutputter.new(barcode).to_png(margin:0, height: 200, xdim: 3)
     attachments.inline["barcode.png"] = png
     attachments.inline["logo.png"] = File.read("#{Rails.root}/app/assets/images/logo.png")
-    @activities = ticket.activities.select {|activity| activity.activity_type.public != true }
+    if [5, 7, 8, 10, 15, 16].include?(@ticket.ticket_type_id)
+      attachments["visitas.jpg"] = File.read("#{Rails.root}/app/assets/images/visitas.jpg")
+    end
+    @activities = ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
     asunto = "¡Gracias por inscribirte a #{ticket.event.name}!"
     mail(to: ticket.email, subject: asunto)
   end
