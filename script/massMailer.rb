@@ -18,5 +18,7 @@
 # end
 tickets = Event.find(2).tickets
 tickets.each do |ticket|
+  sleep 1
+  puts ticket.email
   TicketMailer.reminder_email(ticket).deliver_now
 end
