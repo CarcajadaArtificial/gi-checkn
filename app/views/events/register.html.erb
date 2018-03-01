@@ -9,22 +9,25 @@
 <main class="forms">
   <div class="container">
     <p class="title">Registro</p>
+    <%if params[:activity_id]%>
+      <p class="subtitle"><%=Activity.find(params[:activity_id]).name%></p>
+    <%end%>
     <p class="textbox">
       Hola, a continuación deberás ingresar el código de barras del boleto.
     </p>
     <!-- ACTIVITY REGISTRANDO -->
     <!-- FORMA DE REGISTER -->
     <%= form_tag(register_path, :method => "get") do %>
-        <% if params[:activity_id] %>
-          <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name", params[:activity_id])%>
-        <% else %>
-          <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name")%>
-        <% end %>
-        <br>
+      <br>
       <div class="field">
         <p class="label">Código de barras</p>
         <%= text_field_tag(:ticket, '', autofocus: true) %>
       </div>
+      <% if params[:activity_id] %>
+        <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name", params[:activity_id])%>
+      <% else %>
+        <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name")%>
+      <% end %>
       <%= submit_tag("Registrar") %>
     <% end %>
     <!-- INFORMACIÓN DE PERFIL -->
