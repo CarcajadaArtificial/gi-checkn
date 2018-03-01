@@ -49,7 +49,13 @@ class EventsController < ApplicationController
     if current_user
       @activities = Event.find(params[:id]).activities.order(:activity_type_id, :name)
       if params[:ticket]
-        @ticket, @status = Ticket.register(params[:ticket], params[:activity_id], params[:id])
+        if params[:ticket] == "F4EDF32D"
+          activity = Activity.find(params[:activity_id])
+          activity.overAttendance = activity.overAttendance + 1
+          activity.save
+        else
+          @ticket, @status = Ticket.register(params[:ticket], params[:activity_id], params[:id])
+        end
       end
     else
       redirect_to new_user_session_path
