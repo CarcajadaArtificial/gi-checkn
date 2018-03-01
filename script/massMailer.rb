@@ -17,8 +17,12 @@
 #   TicketMailer.sale_email(ticket).deliver_now
 # end
 tickets = Event.find(2).tickets
+a = 1
 tickets.each do |ticket|
-  sleep 1
-  puts ticket.email
-  TicketMailer.reminder_email(ticket).deliver_now
+  if a > 105 && ticket.status = "preregistered"
+    a = a + 1 
+    sleep 1
+    puts ticket.email
+    TicketMailer.reminder_email(ticket).deliver_now
+  end
 end
