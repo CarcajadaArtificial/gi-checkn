@@ -16,7 +16,7 @@
 # tickets.each do |ticket|
 #   TicketMailer.sale_email(ticket).deliver_now
 # end
-tickets = Event.find(2).tickets.where
+tickets = Event.find(2).tickets
 tickets.each do |ticket|
   TicketMailer.reminder_email(ticket).deliver_now
 end
