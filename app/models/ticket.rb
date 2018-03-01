@@ -3,12 +3,25 @@ class Ticket < ApplicationRecord
   has_many :activities, through: :attendance
   has_many :questions, through: :answer
   belongs_to :ticket_type
-  validate :ticket_type_must_be_available, on: :create
+  has_one :event, through: :ticket_type
+  #validate :ticket_type_must_be_available, on: :create
 
   def ticket_type_must_be_available
     if ticket_type.tickets.count >= ticket_type.max_tickets
       errors.add(:ticket_type, "No hay boletos de ese tipo disponibles.")
     end
+  end
+
+  def self.create_tickets(event)
+    event.max_tickets.times{
+      ticket = Ticket.new
+      ticket.status = "new"
+      ticket.ticket_type = TicketType.where(event_id: event.id, status: "default").first
+      ticket.reference = create_reference
+      ticket.badgeNumber = create_badgeNumber
+      ticket.rollNumber = 0
+      ticket.save
+    }
   end
 
   def self.create_reference
@@ -19,6 +32,7 @@ class Ticket < ApplicationRecord
     end while Ticket.exists?(reference: key)
     key
   end
+
 
   def self.create_badgeNumber
     source = (0..9).to_a

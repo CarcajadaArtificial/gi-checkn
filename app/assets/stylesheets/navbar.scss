@@ -43,6 +43,31 @@ nav{
       }
     }
   }
+
+  &.register{
+    border-bottom: 2px solid $titanium-l;
+    @include flex(row, cen, cen);
+
+    a.logo{
+      display: absolute;
+      margin: 0 auto;
+      img{
+      }
+    }
+
+    .combo_selectButton{
+      padding: 1rem 0;
+      margin: 1rem 2rem;
+
+      select{
+        width: 150px;
+        height: 2rem;
+        font-size: 1rem;
+        margin-right: 2rem;
+      }
+    }
+
+  }
 }
 
 div.login{

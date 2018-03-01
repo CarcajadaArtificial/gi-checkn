@@ -75,6 +75,25 @@ div.modal-space{
     margin-top: 1rem;
     overflow-y: scroll;
 
+    &.negative{
+      background-color: $apple;
+    }
+
+    &.warning{
+      background-color: $mango;
+    }
+
+    &.positive{
+      background-color: $cucumber;
+    }
+
+    div.modal-container{
+      margin-top: 0.5rem;
+      background-color: $snow;
+      @include flex(col, cen, cen);
+    }
+
+
     @include breakpoint_byRange(tin, sma){
       width: 90vw;
     };

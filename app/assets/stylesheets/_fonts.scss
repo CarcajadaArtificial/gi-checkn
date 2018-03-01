@@ -33,6 +33,27 @@ input[type="submit"], .button{
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  &.negative{
+    background-color: $apple;
+  }
+
+  &.warning{
+    background-color: $mango;
+  }
+
+  &.FIXED{
+    display: inline-block;
+  }
+}
+
+a.link{
+  margin: -1rem 0 1rem 0;
+  text-decoration: underline;
+}
+
+p.textbox{
+  margin: 1rem 2rem;
 }
 
 main, div.modal{
@@ -62,7 +83,6 @@ main, div.modal{
 
     p.text{
       width: 100%;
-
     }
   }
 

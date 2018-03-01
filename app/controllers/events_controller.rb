@@ -12,7 +12,7 @@ class EventsController < ApplicationController
                                                 # Description: Display all the information of an event.
   def show
     @event = Event.find(params[:id])
-    @activities_by_day = @event.activities_by_day
+    # @activities_by_day = @event.activities.any? ? @event.activities_by_day : []
   end
                                                 # ======================================================
                                                 # Method: preregister
@@ -53,11 +53,15 @@ class EventsController < ApplicationController
                                                 # Description: Helps the staff sell tickets. Assignes
                                                 #   email and full name to a particular ticket.
   def sale
-    @selected_ticket_type
-    @event = Event.find(params[:id])
-    @ticket_types = @event.available_ticket_types
-    puts @ticket_types.first.name
-    @ticket = Ticket.new
+    if current_user
+      @event = Event.find(params[:id])
+      @ticket_types = @event.available_ticket_types
+      @selected_ticket_type = params[:ticket_type] ? params[:ticket_type] : @ticket_types.first
+      @ticket = Ticket.where(ticket_type: TicketType.where(event: @event, status: "default").first).first
+
+    else
+      redirect_to root_path
+    end
   end
                                                 # ======================================================
                                                 # Method: new
@@ -67,7 +71,11 @@ class EventsController < ApplicationController
                                                 #   event. Might be registering for the event in general
                                                 #   or for an activity in particular.
   def new
-    @event = Event.new
+    if current_user
+      @event = Event.new
+    else
+      redirect_to root_path
+    end
   end
                                                 # ======================================================
                                                 # Method: dashboard
@@ -75,8 +83,8 @@ class EventsController < ApplicationController
                                                 # Alias: dashboard
                                                 # Description: Displays generally useful information of
                                                 #   the event.
-  def dashboard
-  end
+  # def dashboard
+  # end
                                                 # ======================================================
                                                 # Method: manager
                                                 # URL: checkn.mx/events/:Urlname/manager
@@ -85,31 +93,39 @@ class EventsController < ApplicationController
                                                 #   questions, activities and activity types) of an
                                                 #   event.
   def manager
-    @event = Event.find(params[:id])
-    if params[:activity]
-      @activity = Activity.find(params[:activity])
+    if current_user
+      @event = Event.find(params[:id])
+      if params[:activity]
+        @activity = Activity.find(params[:activity])
+      else
+        @activity = Activity.new
+      end
+
+      if params[:ticket_type]
+        @ticket_type = TicketType.find(params[:ticket_type])
+      else
+        @ticket_type = TicketType.new
+      end
+
+      if params[:single_access]
+        @single_access = SingleAccess.find(params[:single_access])
+      else
+        @single_access = SingleAccess.new
+      end
+
+      if params[:multiple_access]
+        @multiple_access = MultipleAccess.find(params[:multiple_access])
+      else
+        @multiple_access = MultipleAccess.new
+      end
+
+      if params[:question]
+        @question = Question.find(params[:question])
+      else
+        @question = Question.new
+      end
     else
-      @activity = Activity.new
-    end
-    if params[:ticket_type]
-      @ticket_type = TicketType.find(params[:ticket_type])
-    else
-      @ticket_type = TicketType.new
-    end
-    if params[:single_access]
-      @single_access = SingleAccess.find(params[:single_access])
-    else
-      @single_access = SingleAccess.new
-    end
-    if params[:multiple_access]
-      @multiple_access = MultipleAccess.find(params[:multiple_access])
-    else
-      @multiple_access = MultipleAccess.new
-    end
-    if params[:question]
-      @question = Question.find(params[:question])
-    else
-      @question = Question.new
+      redirect_to root_path
     end
   end
                                                 # ======================================================
@@ -117,15 +133,15 @@ class EventsController < ApplicationController
                                                 # URL: checkn.mx/events/:Urlname/edit
                                                 # Alias: event_edit
                                                 # Description: Edits the general event information
-  def edit
-  end
+  # def edit
+  # end
                                                 # ======================================================
                                                 # Method: staff
                                                 # URL: checkn.mx/events/:Urlname/staff
                                                 # Alias: staff
                                                 # Description: Manages the staff and permissions.
-  def staff
-  end
+  # def staff
+  # end
                                                 # ======================================================
                                                 # Method: database
                                                 # URL: checkn.mx/events/:Urlname/database
@@ -133,14 +149,19 @@ class EventsController < ApplicationController
                                                 # Description: Filters, displays and groups the whole
                                                 #   database of tickets.
   def database
+    if current_user
+      @tickets= Event.find(params[:id]).tickets.where(status: "sold")
+    else
+      redirect_to root_path
+    end
   end
 
                                                 # EVENT SCAFFOLD METHODS
   # GET /events
   # GET /events.json
-  def index
-    @events = Event.all
-  end
+  # def index
+  #   @events = Event.all
+  # end
 
   # POST /events
   # POST /events.json
@@ -149,7 +170,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to action: "show", controller: "events", id: @event.id, notice: 'Event was successfully created.' }
+        TicketType.create(event_id: @event.id, status: "default", name: "Default ticket type for " + @event.name )
+        Ticket.create_tickets(@event)
+        format.html { redirect_to action: "show", controller: "events", id: @event.id }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -163,7 +186,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @event}
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -191,6 +214,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :urlName, :startDate, :endDate, :imageUrl, :mainColor, :color2, :locationCode, :activity_id)
+      params.require(:event).permit(:name, :description, :urlName, :startDate, :endDate, :imageUrl, :mainColor, :color2, :locationCode, :activity_id, :max_tickets)
     end
 end

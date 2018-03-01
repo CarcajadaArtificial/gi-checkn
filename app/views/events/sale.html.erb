@@ -5,7 +5,7 @@
     <p class="description">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </p>
-    <%= form_for @ticket, url: ticket_create_path do |f| %>
+    <%=  form_with(model: @ticket, local: true) do |f| %>
       <div class="field">
         <p class="label">Nombre completo</p>
         <%= f.text_field :fullName %>
@@ -14,7 +14,7 @@
         <p class="label">Correo electrónico</p>
         <%= f.text_field :email %>
       </div>
-      <%= f.collection_select  :ticket_type_id, @ticket_types, :id, :name, prompt: "Selecciona el tipo de boleto"%>
+      <%= f.collection_select  :ticket_type_id, @ticket_types, :id, :name, {selected: @selected_ticket_type}%>
       <%= f.submit "Create" %>
       <% if Ticket.where(reference: params[:reference]).present? %>
         <p class="title">Venta anterior</p>
