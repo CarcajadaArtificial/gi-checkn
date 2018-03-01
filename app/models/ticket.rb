@@ -55,7 +55,8 @@ class Ticket < ApplicationRecord
     end while Ticket.exists?(badgeNumber: key)
     key
   end
-  def register(code, activity_id, event_id)
+
+  def self.register(code, activity_id, event_id)
     if code.length > 5
       ticket = Ticket.find_by(badgeNumber: code)
     else
@@ -66,17 +67,17 @@ class Ticket < ApplicationRecord
       event = Event.find(event_id)
       if activity.activity_type.public
         Attendance.create(activity: activity, ticket: ticket, attended: true)
-        status = "success"
+        return ticket, "success"
       else
-        if ticket.activities.exits?(activity)
+        if ticket.activities.exists?(activity.id)
           Attendance.where(activity: activity, ticket: ticket).update(attended: true)
-          status = "success"
+          return ticket, "success"
         else
-          status = "not_authorized"
+          return ticket, "not_authorized"
         end
       end
     else
-      status = "not_found"
+      return ticket, "not_found"
     end
   end
 

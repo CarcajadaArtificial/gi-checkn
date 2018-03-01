@@ -47,8 +47,9 @@ class EventsController < ApplicationController
                                                 #   or for an activity in particular.
   def register
     if current_user
-      if params[:ticket] != ""
-        @status = Ticket.register(params[:ticket], params[:activity_id], params[:id])
+      @activities = Event.find(1).activities
+      if params[:ticket]
+        @ticket, @status = Ticket.register(params[:ticket], params[:activity_id], params[:id])
       end
     else
       redirect_to new_user_session_path

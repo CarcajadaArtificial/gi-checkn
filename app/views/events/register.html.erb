@@ -1,53 +1,60 @@
 <!-- RENDER DE MODALES -->
-<%= render 'events/partials/modals/register/eventFull' %>
-<%= render 'events/partials/nav/register' %>
+<% if @status == "not_found" %>
+  <%= render 'events/partials/modals/register/notFound' %>
+<% end %>
+<%= render 'events/partials/nav/main' %>
 <main class="forms">
   <div class="container">
     <p class="title">Registro</p>
-    <!-- ACTIVITY REGISTRANDO -->
-    <p class="subtitle">Entrada al evento</p>
     <p class="textbox">
       Hola, staff-name, a continuación deberás ingresar el código de barras del boleto.
     </p>
+    <!-- ACTIVITY REGISTRANDO -->
     <!-- FORMA DE REGISTER -->
-    <form class="" action="index.html" method="post">
+    <%= form_tag(register_path, :method => "get") do %>
+        <% if params[:activity_id] %>
+          <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name", params[:activity_id])%>
+        <% else %>
+          <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name")%>
+        <% end %>
+        <br>
       <div class="field">
-        <div class="combo_inputButton">
-          <input type="text" name="" value="Hola" class="input">
-          <input type="submit" name="Buscar" value="Buscar">
-        </div>
+        <p class="label">Código de barras</p>
+        <%= text_field_tag(:ticket, '', autofocus: true) %>
       </div>
-    </form>
+      <%= submit_tag("Registrar") %>
+    <% end %>
     <!-- INFORMACIÓN DE PERFIL -->
-    <div class="profileInformation">
-      <p class="subtitle">Información del perfil</p>
-      <!-- INFORMACIÓN DE TICKET -->
-      <div class="dataField">
-        <p class="label">Nombre</p>
-        <p class="data">Oscar Alfonso Guerrero</p>
+    <% if @ticket %>
+      <div class="profileInformation">
+        <p class="subtitle">Información del perfil</p>
+        <!-- INFORMACIÓN DE TICKET -->
+        <div class="dataField">
+          <p class="label">Nombre</p>
+          <p class="data"><%= @ticket.fullName %></p>
+        </div>
+        <div class="dataField">
+          <p class="label">Correo Electrónico</p>
+          <p class="data"><%= @ticket.email %></p>
+        </div>
+        <div class="dataField">
+          <p class="label">Código de Referencia</p>
+          <p class="data"><%= @ticket.reference %></p>
+        </div>
+        <div class="dataField">
+          <p class="label">Número de lista</p>
+          <p class="data"><%= @ticket.rollNumber %></p>
+        </div>
+        <p class="subtitle">Actividades</p>
+        <!-- INFORMACIÓN DE ACTIVITIES -->
+        <% @ticket.activities.each do |activity| %>
+          <div class="dataField">
+            <p class="label"><%= activity.activity_type.name %></p>
+            <p class="data"><%= activity.name %></p>
+          </div>
+        <% end %>
       </div>
-      <div class="dataField">
-        <p class="label">Correo Electrónico</p>
-        <p class="data">oscar_alfonso@guerrero.mx</p>
-      </div>
-      <div class="dataField">
-        <p class="label">Código de Referencia</p>
-        <p class="data">AB420</p>
-      </div>
-      <p class="subtitle">Actividades</p>
-      <!-- INFORMACIÓN DE ACTIVITIES -->
-      <div class="dataField">
-        <p class="label">Nombre</p>
-        <p class="data">Oscar Alfonso Guerrero</p>
-      </div>
-      <div class="dataField">
-        <p class="label">Correo Electrónico</p>
-        <p class="data">oscar_alfonso@guerrero.mx</p>
-      </div>
-      <div class="dataField">
-        <p class="label">Código de Referencia</p>
-        <p class="data">AB420</p>
-      </div>
-    </div>
+    <% else %>
+    <% end %>
   </div>
 </main>

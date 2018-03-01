@@ -3,12 +3,13 @@
     <%= image_tag("logo-black.svg", alt: "Checkn Logo", class: "logo") %>
   <% end %>
   <div class="combo_selectButton">
-    <select class="" name="">
-      <option value="abc">abc</option>
-      <option value="abc">dsiohñoadisjfiñsdjiofjsadñiojfoñ ñiodsj ñiofjdsofjadosñijfsioñjsadoifjas</option>
-      <option value="abc">abc</option>
-      <option value="abc">abc</option>
-    </select>
-    <a href="#" class="button">Cambiar</a>
+    <%= form_tag(register_path, :method => "get") do %>
+      <% if params[:activity_id] %>
+        <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name", params[:activity_id])%>
+      <% else %>
+        <%= select_tag 'activity_id', options_from_collection_for_select(@activities, "id", "name")%>
+      <% end %>
+      <%= submit_tag("Cambiar") %>
+    <% end %>
   </div>
 </nav>
