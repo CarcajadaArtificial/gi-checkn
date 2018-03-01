@@ -1,0 +1,95 @@
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  /* Reset */
+  @import url('https://fonts.googleapis.com/css?family=Varela+Round');
+  *{ margin: 0; padding: 0; border: 0; }
+  body{ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  a{ text-decoration: none; }
+  /* Structure */
+  table{ width: 100%; }
+  .middle{ width: 60%; }
+  .header{ height: 55px; background-color: #fff; }
+  .container{ background-color: #fff; }
+  .logo{ width: 200px; height: 200px; border-radius: 100px; margin: 0 auto 2rem auto; background-position: center; background-size: cover;}
+  .checkn > img { width: 400px; height: 105px; }
+  .space{ height: 2rem; }
+  img{ width: 300px; height: 100px; background-color: #161519; margin: 0 auto 1rem auto;}
+  /* Text */
+  *{ font-family: 'Varela Round', sans-serif; text-align: center; color: #161519;}
+  p.title{ font-size: 2rem; font-weight: 600; margin: 2rem 0 1rem 0; }
+  p.subtitle{ font-size: 1.2rem; margin-bottom: 1.5rem; }
+  p.activity{ margin-bottom: 0.5rem; }
+  p.textbox{ padding: 0 4rem; margin-bottom: 1rem;}
+  p.label{ font-size: 0.8rem; font-weight: 600; color: #585760; margin-bottom: 1.5rem; }
+  a.button{ font-size: 0.8rem; padding: 1rem 1.5rem; margin: 2rem 0; color: #fff; border-radius: 100px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  /* Responsive */
+  @media only screen and (max-device-width: 600px){
+    .middle{ width: 90%; }
+    p.textbox, p.subtitle, p.title, p.label{ padding: 0 2rem; }
+  }
+  /* Reset values with ruby */
+  .button, table, .logo{ background-color: #1dda78; }
+  .logo{ background-image: url("<%= @ticket.event.imageUrl%>"); }
+  </style>
+</head>
+<table cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="auto" class="space"></td>
+    <td class="space middle"></td>
+    <td width="auto" class="space"></td>
+  </tr>
+  <!-- Saludo -->
+  <tr>
+    <td width="auto"></td>
+    <td class="container middle">
+      <p class="title">¡Hola <%= @ticket.fullName.split.first%>!</p>
+      <p class="subtitle">¡Mañana es el <%=@ticket.event.name%>!</p>
+      <div class="logo"></div>
+    </td>
+    <td width="auto"></td>
+  </tr>
+  <!-- Código de barras -->
+  <tr>
+    <td width="auto"></td>
+    <td class="container middle">
+      <p class="textbox">
+        A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
+        necesario para entrar al evento.<%if [5, 7, 8, 10, 15, 16].include?(@ticket.ticket_type_id)%> Si
+        te inscribiste a una Visita Empresarial, por favor descarga la imagen adjunta que contiene información
+        importante.<%end%>
+      </p>
+      <%= image_tag(attachments['barcode.png'].url) %>
+    </td>
+    <td width="auto"></td>
+  </tr>
+  <!-- Actividades -->
+  <tr>
+    <td width="auto"></td>
+    <td class="container middle">
+      <p class="title">Éste es tu horario: </p>
+      <%@activities.each do |activity|%>
+        <p class="subtitle activity"><%=activity.name%></p>
+        <p class="label"><%=activity.date%>, <%=activity.time.strftime "%H:%M"%>, <%=activity.location%></p>
+      <%end%>
+    </td>
+    <td width="auto"></td>
+  </tr>
+  <tr>
+    <td width="auto"></td>
+    <td class="container middle">
+      <div style="background: transparent; margin: 40px auto;" class="checkn" align="center">
+        <%= image_tag(attachments['logo.png'].url) %>
+      </div>
+      <!-- <%= image_tag("logo-black.svg", alt: "Checkn Logo", class: "checkn") %> -->
+    </td>
+    <td width="auto"></td>
+  </tr>
+  <tr>
+    <td width="auto" class="space"></td>
+    <td class="space middle"></td>
+    <td width="auto" class="space"></td>
+  </tr>
+</table>

@@ -46,6 +46,13 @@ class EventsController < ApplicationController
                                                 #   event. Might be registering for the event in general
                                                 #   or for an activity in particular.
   def register
+    if current_user
+      if params[:ticket] != ""
+        @status = Ticket.register(params[:ticket], params[:activity_id], params[:id])
+      end
+    else
+      redirect_to new_user_session_path
+    end
   end
                                                 # ======================================================
                                                 # Method: sale

@@ -57,7 +57,9 @@
       <td class="container middle">
         <p class="textbox">
           A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
-          necesario para entrar al evento.
+          necesario para entrar al evento.<%if [1, 5, 7, 8, 10, 15, 16].include?(@ticket.ticket_type_id)%> Si
+          te inscribiste a una Visita Empresarial, por favor revisa la imagen adjunta que contiene información
+          importante.<%end%>
         </p>
         <%= image_tag(attachments['barcode.png'].url) %>
       </td>

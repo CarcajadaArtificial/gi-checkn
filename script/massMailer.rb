@@ -12,7 +12,11 @@
 #      TicketMailer.sale_email(ticket).deliver_now
 #    end
 # end
-tickets = Event.find(2).tickets.where(status: "sold")
+# tickets = Event.find(2).tickets.where(status: "sold")
+# tickets.each do |ticket|
+#   TicketMailer.sale_email(ticket).deliver_now
+# end
+tickets = Event.find(2).tickets.where
 tickets.each do |ticket|
-  TicketMailer.sale_email(ticket).deliver_now
+  TicketMailer.reminder_email(ticket).deliver_now
 end

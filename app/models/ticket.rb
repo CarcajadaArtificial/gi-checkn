@@ -4,13 +4,13 @@ class Ticket < ApplicationRecord
   has_many :questions, through: :answer
   belongs_to :ticket_type
   has_one :event, through: :ticket_type
-  #validate :activities_must_be_available, on: :update
+  validate :activities_must_be_available, on: :update
   #validate :ticket_type_must_be_available, on: :create
 
   def activities_must_be_available
     if activities.any?
       activities.each do |a|
-        if a.tickets.count >= a.capacity
+        if a.tickets.count > a.capacity
           errors[:base] << "Lo sentimos, uno de las actividades que elegiste está llena."
         end
       end
@@ -54,6 +54,30 @@ class Ticket < ApplicationRecord
       12.times{ key += source[rand(source.size)].to_s }
     end while Ticket.exists?(badgeNumber: key)
     key
+  end
+  def register(code, activity_id, event_id)
+    if code.length > 5
+      ticket = Ticket.find_by(badgeNumber: code)
+    else
+      ticket = Ticket.find_by(reference: code)
+    end
+    if ticket
+      activity = Activity.find(activity_id)
+      event = Event.find(event_id)
+      if activity.activity_type.public
+        Attendance.create(activity: activity, ticket: ticket, attended: true)
+        status = "success"
+      else
+        if ticket.activities.exits?(activity)
+          Attendance.where(activity: activity, ticket: ticket).update(attended: true)
+          status = "success"
+        else
+          status = "not_authorized"
+        end
+      end
+    else
+      status = "not_found"
+    end
   end
 
   def create_rollNumber
