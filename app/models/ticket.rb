@@ -10,7 +10,7 @@ class Ticket < ApplicationRecord
   def activities_must_be_available
     if activities.any?
       activities.each do |a|
-        if a.tickets.count > a.capacity
+        if a.tickets.count > a.capacity && a.capacity > 0
           errors[:base] << "Lo sentimos, uno de las actividades que elegiste está llena."
         end
       end
