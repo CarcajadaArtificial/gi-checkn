@@ -15,15 +15,9 @@ class TicketMailer < ApplicationMailer
 
   def reminder_email(ticket)
     @ticket = ticket
-    barcode = Barby::Code128B.new(ticket.badgeNumber)
-    png = Barby::PngOutputter.new(barcode).to_png(margin:0, height: 200, xdim: 3)
-    attachments.inline["barcode.png"] = png
     attachments.inline["logo.png"] = File.read("#{Rails.root}/app/assets/images/logo.png")
-    if [5, 7, 8, 10, 15, 16].include?(@ticket.ticket_type_id)
-      attachments["visitas.jpg"] = File.read("#{Rails.root}/app/assets/images/visitas.jpg")
-    end
-    @activities = ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
-    asunto = "¡Te esperamos mañana en el #{ticket.event.name}!"
+    @activities = ticket.activities.where(activity_type_id: 5)
+    asunto = "¡No te pierdas el último día del #{ticket.event.name}!"
     mail(to: ticket.email, subject: asunto)
   end
 

@@ -46,7 +46,6 @@
     <td width="auto"></td>
     <td class="container middle">
       <p class="title">¡Hola <%= @ticket.fullName.split.first%>!</p>
-      <p class="subtitle">¡Mañana es el <%=@ticket.event.name%>!</p>
       <div class="logo"></div>
     </td>
     <td width="auto"></td>
@@ -56,12 +55,8 @@
     <td width="auto"></td>
     <td class="container middle">
       <p class="textbox">
-        A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
-        necesario para entrar al evento.<%if [5, 7, 8, 10, 15, 16].include?(@ticket.ticket_type_id)%> Si
-        te inscribiste a una Visita Empresarial, por favor descarga la imagen adjunta que contiene información
-        importante.<%end%>
+        Te esperamos mañana en el último día de actividades del <%=@ticket.event.name%>.
       </p>
-      <%= image_tag(attachments['barcode.png'].url) %>
     </td>
     <td width="auto"></td>
   </tr>
@@ -69,10 +64,10 @@
   <tr>
     <td width="auto"></td>
     <td class="container middle">
-      <p class="title">Éste es tu horario: </p>
+      <p class="subtitle" style="font-weight: bold;">Estas son las Quicktalks en las que estás inscrito: </p>
       <%@activities.each do |activity|%>
         <p class="subtitle activity"><%=activity.name%></p>
-        <p class="label"><%=activity.date%>, <%=activity.time.strftime "%H:%M"%>, <%=activity.location%></p>
+        <br>
       <%end%>
     </td>
     <td width="auto"></td>
