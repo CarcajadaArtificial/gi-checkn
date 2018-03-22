@@ -24,6 +24,9 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if params[:reference]
       @ticket = Ticket.find_by!(reference: params[:reference])
+      if @ticket.status == "preregistered"
+        redirect_to action: "checkout", controller: "events", reference: params[:reference]
+      end
     end
   end
                                                 # ======================================================
@@ -34,7 +37,7 @@ class EventsController < ApplicationController
                                                 #   and instructions.
   def checkout
     @ticket = Ticket.find_by!(reference: params[:reference])
-    @activities = @ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
+    @activities = @ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:date)
     barcode = Barby::Code128B.new(@ticket.badgeNumber)
     @html_barcode = Barby::HtmlOutputter.new(barcode)
   end
