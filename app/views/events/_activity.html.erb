@@ -10,10 +10,6 @@
       <p class="label" >Tipo de Actividad</p>
       <%= collection_select(:activity, :activity_type_id, ActivityType.all, :id, :name,{:selected => activity.activity_type_id}, prompt: true) %>
     </div>
-    <div class="field" >
-      <p class="label">Descripción</p>
-      <%= f.text_area :description %>
-    </div>
     <div class="field">
       <p class="label">Capacidad</p>
       <%= f.number_field :capacity, class: :text_field, step: 1 %>
