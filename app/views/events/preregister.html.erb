@@ -27,7 +27,7 @@
         <% @ticket.ticket_type.multiple_accesses.each do |multiple_access| %>
           <div class="field">
             <p class="label"><%=multiple_access.activity_type.name%> (selecciona <%=multiple_access.amount%>)</p>
-            <%= f.collection_check_boxes(:activity_ids, Activity.where(activity_type_id: multiple_access.activity_type.id, event_id: @event.id).select {|activity| activity.capacity > activity.tickets.count}.sort_by(&:name) , :id, :name_with_host) do |b| %>
+            <%= f.collection_check_boxes(:activity_ids, Activity.where(activity_type_id: multiple_access.activity_type.id, event_id: @event.id).select {|activity| activity.capacity > activity.tickets.count}.sort_by(&:name) , :id, :name_with_time) do |b| %>
               <div class="checkbox">
                 <%= b.check_box(class:"selected", :"data-amount" => multiple_access.amount) %>
                 <%= b.label %>

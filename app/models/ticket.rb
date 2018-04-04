@@ -5,13 +5,37 @@ class Ticket < ApplicationRecord
   belongs_to :ticket_type
   has_one :event, through: :ticket_type
   validate :activities_must_be_available, on: :update
+  validate :activities_must_not_collide, on: :update
   #validate :ticket_type_must_be_available, on: :create
 
   def activities_must_be_available
     if activities.any?
       activities.each do |a|
         if a.tickets.count > a.capacity && a.capacity > 0
-          errors[:base] << "Lo sentimos, uno de las actividades que elegiste está llena."
+          errors[:base] << "Lo sentimos, una de las actividades que elegiste está llena."
+        end
+      end
+    end
+  end
+
+  def activities_must_not_collide
+    if activities.any?
+      activity_ids = activities.pluck(:id)
+      acts = []
+      activity_ids.each do |act_id|
+        acts.push(Activity.find(act_id))
+      end
+      acts.each_with_index do |a, index|
+        other_activities = acts
+        other_activities.delete_at(index)
+        other_activities.each do |b|
+          if a.date == b.date
+            if a.duration && b.duration
+              if (a.time< b.time + b.duration.minutes) && (a.time + a.duration.minutes > b.time)
+                errors[:base] << "Lo sentimos, una de las actividade que elegiste se empalma con otra"
+              end
+            end
+          end
         end
       end
     end

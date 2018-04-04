@@ -10,4 +10,8 @@ class Activity < ApplicationRecord
     "#{name} #{host}"
   end
 
+  def name_with_time
+    "#{time.strftime "%H:%M"} #{name}"
+  end
+
 end
