@@ -75,7 +75,7 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       @ticket_types = @event.available_ticket_types
       @selected_ticket_type = params[:ticket_type] ? params[:ticket_type] : @ticket_types.first
-      @ticket = Ticket.where(rollNumber: @event.tickets.where(status: "new").minimum(:rollNumber), event_id: @event.id)
+      @ticket = @event.tickets.find_by(rollNumber: @event.tickets.where(status: "new").minimum(:rollNumber))
 
     else
       redirect_to root_path
