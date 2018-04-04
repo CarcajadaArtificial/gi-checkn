@@ -25,7 +25,7 @@ class TicketTypesController < ApplicationController
   # POST /ticket_types.json
   def create
     @ticket_type = TicketType.new(ticket_type_params)
-    @ticket_type.event_id = current_user.id
+    @ticket_type.event_id = current_user.event_id
     respond_to do |format|
       if @ticket_type.save
         format.html { redirect_to "/events/"+ @ticket_type.event.urlName + "/manager", notice: 'Ticket type was successfully created.' }
