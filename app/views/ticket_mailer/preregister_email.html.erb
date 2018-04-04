@@ -69,11 +69,20 @@
     <tr>
       <td width="auto"></td>
       <td class="container middle">
-        <p class="title">Éste es tu horario: </p>
+        <p class="textbox"> Recuerda que tu boleto te permitirá accesar a todas las Conferencias y Quicktalks que ofrece el Congreso.</p>
+        <p class="title">Las actividades que seleccionaste son: </p>
         <%@activities.each do |activity|%>
           <p class="subtitle activity"><%=activity.name%></p>
           <p class="label"><%=activity.date%>, <%=activity.time.strftime "%H:%M"%>, <%=activity.location%></p>
         <%end%>
+      </td>
+      <td width="auto"></td>
+    </tr>
+    <tr>
+      <td width="auto"></td>
+      <td class="container middle">
+        <p class="textbox"> Si deseas realizar algún cambio en las actividades que seleccionaste, es necesario que contactes al equipo de checkn en el siguiente correo: info.checkinmx@gmail.com</p>
+        <p class="textbox"> Para mayor información del congreso puedes contactar a los organizadores a través de su página de FB: Congreso de Medicina del Tecnológico de Monterrey</p>
       </td>
       <td width="auto"></td>
     </tr>
