@@ -1,4 +1,5 @@
 <% @event = event %>
+<% @activities = @event.activities.order(:activity_type_id, :name)%>
 <div class="manager">
   <div class="container">
     <p class="title">Actividades</p>
@@ -16,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @event.activities.each do |activity| %>
+        <% @activities.each do |activity| %>
         <tr>
           <td class="big"><div class="cell"><%= activity.name %></div></td>
           <td class="small"><div class="cell"><%= activity.date %></div></td>
