@@ -29,7 +29,7 @@ class ActivitiesController < ApplicationController
   # POST /activities.json
   def create
     @activity = Activity.new(activity_params)
-    @activity.event_id = current_user.id
+    @activity.event_id = current_user.event_id
     respond_to do |format|
       if @activity.save
         format.html {redirect_to "/events/" + @activity.event.urlName + "/manager", notice: 'Activity was successfully created.',turbolinks: false
