@@ -22,6 +22,7 @@ class Ticket < ApplicationRecord
     if activities.any?
       activity_ids = activities.pluck(:id)
       acts = []
+      puts activity_ids
       activity_ids.each do |act_id|
         acts.push(Activity.find(act_id))
       end
@@ -33,6 +34,7 @@ class Ticket < ApplicationRecord
             if a.duration && b.duration
               if (a.time< b.time + b.duration.minutes) && (a.time + a.duration.minutes > b.time)
                 errors[:base] << "Lo sentimos, una de las actividade que elegiste se empalma con otra"
+                puts "error: " + a.name + " & " + b.name
               end
             end
           end
