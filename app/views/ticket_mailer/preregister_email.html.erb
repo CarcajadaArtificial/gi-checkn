@@ -57,9 +57,7 @@
       <td class="container middle">
         <p class="textbox">
           A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
-          necesario para entrar al evento.<%if [1, 5, 7, 8, 10, 15, 16].include?(@ticket.ticket_type_id)%> Si
-          te inscribiste a una Visita Empresarial, por favor revisa la imagen adjunta que contiene información
-          importante.<%end%>
+          necesario para entrar al evento.
         </p>
         <%= image_tag(attachments['barcode.png'].url) %>
       </td>
@@ -82,7 +80,14 @@
       <td width="auto"></td>
       <td class="container middle">
         <p class="textbox"> Si deseas realizar algún cambio en las actividades que seleccionaste, es necesario que contactes al equipo de checkn en el siguiente correo: info.checkinmx@gmail.com</p>
-        <p class="textbox"> Para mayor información del congreso puedes contactar a los organizadores a través de su página de FB: Congreso de Medicina del Tecnológico de Monterrey</p>
+        <% case @ticket.event.id%>
+        <% when 6%>
+          <p class="textbox"> Para mayor información del congreso puedes contactar a los organizadores a través de su página de FB: Congreso de Medicina del Tecnológico de Monterrey</p>
+        <% when 9%>
+          <p class="textbox"> Para mayor información del congreso puedes contactar a los organizadores a través de su página de FB: Student Energy at Tec de Monterrey</p>
+        <% when 10%>
+          <p class="textbox"> Para mayor información del congreso puedes contactar a los organizadores a través de su página de FB: Congreso Internacional de Mecatrónica - Automatización y Tecnología</p>
+        <%end%>
       </td>
       <td width="auto"></td>
     </tr>
