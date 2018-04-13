@@ -104,7 +104,7 @@ class EventsController < ApplicationController
   def dashboard
    if current_user
      @event = Event.find(params[:id])
-     @activities = Activity.joins(:activity_type).where(activity_types: {public: false}, event_id: @event.id).order(:activity_type_id, :date, :time).pluck(:name)
+     @activities = Activity.joins(:activity_type).where(activity_types: {public: false}, event_id: @event.id).order(:activity_type_id, :date, :time)
 
    else
      redirect_to root_path
