@@ -1,48 +1,50 @@
 <%= render 'events/partials/nav/main' %>
 <%= render 'events/partials/nav/dashboard' %>
-<div class="manager">
-  <div class="container">
-    <% if params[:activity] %>
-      <% activity = Activity.find(params[:activity]) %>
-      <% tickets = activity.tickets%>
-      <h1 class="title"> <strong> <%= activity.name%> </strong> </h1>
-      <table class="dash_table">
-        <thead>
+<main class="dashboard">
+  <div class="manager">
+    <div class="container">
+      <% if params[:activity] %>
+        <% activity = Activity.find(params[:activity]) %>
+        <% tickets = activity.tickets%>
+        <h1 class="title"> <strong> <%= activity.name%> </strong> </h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Referencia</th>
+            </tr>
+          </thead>
+          <% tickets.each do |ticket| %>
           <tr>
-            <th>Nombre</th>
-            <th>Referencia</th>
+            <td> <%= ticket.fullName %></td>
+            <td><strong> <%= ticket.reference%></strong></td>
           </tr>
-        </thead>
-        <% tickets.each do |ticket| %>
-        <tr>
-          <td> <%= ticket.fullName %></td>
-          <td><strong> <%= ticket.reference%></strong></td>
-        </tr>
-        <% end %>
-      </table>
-    <% else %>
-      <h1 class="title"><strong>Actividades</strong></h1>
-      <table class="">
-        <thead>
-          <tr>
-            <th class="big"><div class="cell">Actividad</div></th>
-            <th class="small"><div class="cell">Fecha</div></th>
-            <th class="small"><div class="cell">Hora</div></th>
-            <th class="big"><div class="cell">Ubicacion</div></th>
-            <th class="small"><div class="cell">Cupo</div></th>
-          </tr>
-        </thead>
+          <% end %>
+        </table>
+      <% else %>
+        <h1 class="title"><strong>Actividades</strong></h1>
+        <table>
+          <thead>
+            <tr>
+              <th class="big"><div class="cell">Actividad</div></th>
+              <th class="small"><div class="cell">Fecha</div></th>
+              <th class="small"><div class="cell">Hora</div></th>
+              <th class="big"><div class="cell">Ubicacion</div></th>
+              <th class="small"><div class="cell">Cupo</div></th>
+            </tr>
+          </thead>
 
-        <% @activities.each do |activity| %>
-        <tr>
-          <td class="big"><div class="cell"><%= link_to activity.name, {activity: activity.id} %></div></td>
-          <td class="small"><div class="cell"><%= activity.date %></div></td>
-          <td class="small"><div class="cell"><%= activity.time.strftime "%H:%M" %></div></td>
-          <td class="big"><div class="cell"><%= activity.location %></div></td>
-          <td class="small"><div class="cell"><%= activity.capacity %></div></td>
-        </tr>
-        <% end %>
-      </table>
-  <% end %>
+          <% @activities.each do |activity| %>
+            <tr>
+              <td class="big"><div class="cell"><%= link_to activity.name, {activity: activity.id} %></div></td>
+              <td class="small"><div class="cell"><%= activity.date %></div></td>
+              <td class="small"><div class="cell"><%= activity.time.strftime "%H:%M" %></div></td>
+              <td class="big"><div class="cell"><%= activity.location %></div></td>
+              <td class="small"><div class="cell"><%= activity.tickets.count%>/<%= activity.capacity%></div></td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
   </div>
-</div>
+</main>
