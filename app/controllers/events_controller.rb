@@ -101,8 +101,15 @@ class EventsController < ApplicationController
                                                 # Alias: dashboard
                                                 # Description: Displays generally useful information of
                                                 #   the event.
-  # def dashboard
-  # end
+  def dashboard
+   if current_user
+     @event = Event.find(params[:id])
+     @activities = Activity.joins(:activity_type).where(activity_types: {public: false}, event_id: @event.id).order(:activity_type_id, :date, :time).pluck(:name)
+
+   else
+     redirect_to root_path
+   end
+  end
                                                 # ======================================================
                                                 # Method: manager
                                                 # URL: checkn.mx/events/:Urlname/manager

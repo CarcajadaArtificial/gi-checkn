@@ -1,3 +1,19 @@
 <%= render 'events/partials/nav/main' %>
-<%= render 'events/partials/nav/dashboard' %> 
-<h1>Dashboard</h1>
+<%= render 'events/partials/nav/dashboard' %>
+<h1>Actividades</h1>
+<table class="dash_table">
+  <thead>
+    <tr>
+      <th style="border: 0;"></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <% @activities.each do |activity| %>
+    <tr>
+      <td> <%= link_to activity.name, {activity: activity.id} %></td>
+      <td> <%= activity.tickets.count %> / <%= activity.capacity %></td>
+    </tr>
+  <% end %>
+
+</table>
