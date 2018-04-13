@@ -1,19 +1,38 @@
 <%= render 'events/partials/nav/main' %>
 <%= render 'events/partials/nav/dashboard' %>
-<h1>Actividades</h1>
-<table class="dash_table">
-  <thead>
+<% if params[:activity] %>
+  <% activity = Activity.find(params[:activity]) %>
+  <% tickets = activity.tickets%>
+  <h1 class="title"><%= activity.name%></h1>
+  <table class="dash_table">
+    <thead>
+      <tr>
+        <th style="border: 0;">Nombre</th>
+        <th>Referencia</th>
+      </tr>
+    </thead>
+    <% tickets.each do |ticket| %>
     <tr>
-      <th style="border: 0;"></th>
-      <th></th>
+      <td> <%= ticket.fullName %></td>
+      <td><strong> <%= ticket.reference%></strong></td>
     </tr>
-  </thead>
+    <% end %>
+  </table>
+<% else %>
+  <h1 class="title">Actividades</h1>
+  <table class="dash_table">
+    <thead>
+      <tr>
+        <th style="border: 0;"></th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <% @activities.each do |activity| %>
+    <% @activities.each do |activity| %>
     <tr>
       <td> <%= link_to activity.name, {activity: activity.id} %></td>
-      <td> <%= activity.tickets.count %> / <%= activity.capacity %></td>
+      <td><strong> <%= activity.tickets.count %> / <%= activity.capacity %></strong></td>
     </tr>
-  <% end %>
-
-</table>
+    <% end %>
+  </table>
+<% end %>
