@@ -26,20 +26,18 @@
         <table>
           <thead>
             <tr>
-              <th class="big"><div class="cell">Actividad</div></th>
+              <th>Nombre</th>
               <th class="small"><div class="cell">Fecha</div></th>
               <th class="small"><div class="cell">Hora</div></th>
-              <th class="big"><div class="cell">Ubicacion</div></th>
               <th class="small"><div class="cell">Cupo</div></th>
             </tr>
           </thead>
 
           <% @activities.each do |activity| %>
             <tr>
-              <td class="big"><div class="cell"><%= link_to activity.name, {activity: activity.id} %></div></td>
+              <td><%= link_to activity.name, {activity: activity.id} %></td>
               <td class="small"><div class="cell"><%= activity.date %></div></td>
               <td class="small"><div class="cell"><%= activity.time.strftime "%H:%M" %></div></td>
-              <td class="big"><div class="cell"><%= activity.location %></div></td>
               <td class="small"><div class="cell"><%= activity.tickets.count%>/<%= activity.capacity%></div></td>
             </tr>
           <% end %>
