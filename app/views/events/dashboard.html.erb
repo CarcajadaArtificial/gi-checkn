@@ -1,9 +1,10 @@
 <%= render 'events/partials/nav/main' %>
 <%= render 'events/partials/nav/dashboard' %>
+<div class="manager">
 <% if params[:activity] %>
   <% activity = Activity.find(params[:activity]) %>
   <% tickets = activity.tickets%>
-  <h1 class="title"><%= activity.name%></h1>
+  <h1 class="title"> <strong> <%= activity.name%> </strong> </h1>
   <table class="dash_table">
     <thead>
       <tr>
@@ -18,8 +19,8 @@
     </tr>
     <% end %>
   </table>
-<% else %>
-  <h1 class="title">Actividades</h1>
+  <% else %>
+  <h1 class="title"><strong>Actividades</strong></h1>
   <table class="dash_table">
     <thead>
       <tr>
@@ -35,4 +36,5 @@
     </tr>
     <% end %>
   </table>
-<% end %>
+  <% end %>
+</div>
