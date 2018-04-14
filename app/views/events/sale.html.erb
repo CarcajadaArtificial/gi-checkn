@@ -27,6 +27,10 @@
             <p class="label">Nombre completo</p>
             <p class="description"><%= Ticket.where(reference: params[:reference]).first.fullName %></p>
           </div>
+          <div class="data">
+            <p class="label">Roll Number</p>
+            <p class="description"><%= Ticket.where(reference: params[:reference]).first.rollNumber %></p>
+          </div>
         </div>
       <% end %>
     <% end %>

@@ -27,7 +27,8 @@ class TicketMailer < ApplicationMailer
     png = Barby::PngOutputter.new(barcode).to_png(margin:0, height: 200, xdim: 3)
     attachments.inline["barcode.png"] = png
     attachments.inline["logo.png"] = File.read("#{Rails.root}/app/assets/images/logo.png")
-    @activities = ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
+    @activities = ticket.activities.joins(:activity_type).where(activity_types: {public: false}).order(:date, :time)
+    # @activities = ticket.activities.select {|activity| activity.activity_type.public != true }.sort_by(&:name)
     asunto = "¡Gracias por inscribirte a #{ticket.event.name}!"
     mail(to: ticket.email, subject: asunto)
   end

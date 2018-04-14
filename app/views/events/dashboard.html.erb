@@ -38,7 +38,7 @@
               <td><%= link_to activity.name, {activity: activity.id} %></td>
               <td class="small"><div class="cell"><%= activity.date %></div></td>
               <td class="small"><div class="cell"><%= activity.time.strftime "%H:%M" %></div></td>
-              <td class="small"><div class="cell"><%= activity.tickets.count%>/<%= activity.capacity%></div></td>
+              <td class="small"><div class="cell"> <strong>  <%= activity.tickets.count%>/<%= activity.capacity%> </strong></div></td>
             </tr>
           <% end %>
         </table>

@@ -48,6 +48,12 @@
       <p class="title">¡Hola <%= @ticket.fullName.split.first%>!</p>
       <p class="subtitle">¡Gracias por comprar un boleto para <%= @ticket.event.name%>!</p>
       <p class="subtitle">Haz click en el botón para escoger tus actividades y terminar tu preregistro:</p>
+      <% if @ticket.event.id == 10 %>
+        <p class="subtitle">Es necesario que leas con atención para que puedas seleccionar tus actividades.</p>
+        <p class="subtitle">No es necesario que selecciones alguna actividad de todos los bloques, si no puedes asistir en esos horarios, puedes dejar el bloque sin seleccionar actividad alguna.</p>
+        <p class="subtitle">Las personas que seleccionan un concurso es porque van a participar, si vas como expectador, no necesitas inscribir la actividad.</p>
+        <p class="subtitle">Toma en consideración que si seleccionas el concurso marcado de 24hrs, ya no podrás asistir a las demás actividades que hay el viernes por la tarde y el sábado por la mañana.</p>
+      <% end %>
       <div class="logo"></div>
       <a href="app.checkn.mx/events/<%=@ticket.event.urlName%>/preregister?reference=<%=@ticket.reference%>" class="button">Inscripcion</a>
     </td>
