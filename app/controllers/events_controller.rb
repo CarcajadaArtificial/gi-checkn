@@ -24,6 +24,9 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if params[:reference]
       @ticket = Ticket.find_by!(reference: params[:reference])
+      if params[:error]
+        @error = "Lo sentimos, una de las actividades que elegiste se empalma con otra"
+      end
       if @ticket.status == "preregistered"
         redirect_to action: "checkout", controller: "events", reference: params[:reference]
       end

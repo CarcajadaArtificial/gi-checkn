@@ -67,12 +67,22 @@
     <tr>
       <td width="auto"></td>
       <td class="container middle">
-        <p class="textbox"> Recuerda que tu boleto te permitirá accesar a todas las Conferencias y Quicktalks que ofrece el Congreso.</p>
         <p class="title">Las actividades que seleccionaste son: </p>
         <%@activities.each do |activity|%>
           <p class="subtitle activity"><%=activity.name%></p>
           <p class="label"><%=activity.date%>, <%=activity.time.strftime "%H:%M"%>, <%=activity.location%></p>
         <%end%>
+        <% if @ticket.event.id == 10 %>
+          <p class="textbox"> Recuerda que tu boleto te permitirá accesar a todas las Conferencias y Quicktalks que ofrece el Congreso.</p>
+          <ul>
+            <li>Conferencia Magistral -  Industria 4.0 por Esaú Ortega, Jueves 10:00 am</li>
+            <li>Conferencia Magistral - Transformación digital y seguridad dentro de la industria, Viernes 1:00 pm</li>
+            <li>Conferencia Magistral - Realidad Virtual y Aumentada, Viernes 5:30 pm</li>
+            <li>Conferencia Magistral - Niveles y estándares de automatización y control, Sábado 12:00 pm</li>
+            <li>FotografiAT - Sábado 2:00 pm</li>
+            <li></li>
+          </ul>
+        <% end %>
       </td>
       <td width="auto"></td>
     </tr>

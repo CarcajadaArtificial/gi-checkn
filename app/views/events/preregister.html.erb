@@ -7,6 +7,14 @@
 
     <% if params[:reference] %>
       <%= form_with(model: @ticket, local: true)  do |f| %>
+        <% if @error %>
+          <div id="error_explanation">
+            <h2 style="color:red;">Hubo un error con tu preregistro: </h2>
+            <ul>
+              <li style="color:red;"> <%= @error %> </li>
+            </ul>
+          </div>
+        <% end %>
         <div class="field">
           <p class="label">Nombre</p>
           <%= f.text_field :fullName %>

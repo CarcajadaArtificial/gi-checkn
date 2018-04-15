@@ -63,7 +63,7 @@ class TicketsController < ApplicationController
           format.html { redirect_to action: "checkout", controller: "events", id: @ticket.ticket_type.event.id, reference: @ticket.reference }
         end
       else
-        format.html { redirect_to action: "preregister", controller: "events", id: @ticket.ticket_type.event.urlName, reference: @ticket.reference }
+        format.html { redirect_to action: "preregister", controller: "events", id: @ticket.ticket_type.event.urlName, reference: @ticket.reference , error: "1" }
       end
     end
   end
