@@ -1,0 +1,13 @@
+<%= render 'events/partials/nav/main' %>
+<%= form_tag(tools_path, :method => "get") do %>
+  <div class="field">
+    <p class="label">Referencia</p>
+    <%= text_field_tag(:reference) %>
+  </div>
+  <div class="field">
+    <p class="label">Activity ID</p>
+    <%= text_field_tag(:activity_id) %>
+  </div>
+  <%= submit_tag("crear") %>
+  <%= submit_tag("reset")%>
+<% end %>

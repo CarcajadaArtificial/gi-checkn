@@ -20,6 +20,22 @@ class EventsController < ApplicationController
                                                 # Alias: preregister
                                                 # Description: Updates the information of an assistant,
                                                 #   identified by the ticket's reference.
+
+  def tools
+    if current_user
+      if params[:commit] == "crear"
+        ticket = Ticket.find_by!(reference: params[:reference])
+        Attendance.create(activity_id: params[:activity_id], ticket_id: ticket.id )
+      elsif params[:commit] == "reset"
+        ticket = Ticket.find_by!(reference: params[:reference])
+        ticket.status = "sold"
+        ticket.save(validate: false)
+      end
+    else
+      redirect_to new_user_session_path
+    end
+  end
+
   def preregister
     @event = Event.find(params[:id])
     if params[:reference]
@@ -81,7 +97,7 @@ class EventsController < ApplicationController
       @ticket = @event.tickets.find_by(rollNumber: @event.tickets.where(status: "new").minimum(:rollNumber))
 
     else
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
                                                 # ======================================================
@@ -95,7 +111,7 @@ class EventsController < ApplicationController
     if current_user
       @event = Event.new
     else
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
                                                 # ======================================================
@@ -110,7 +126,7 @@ class EventsController < ApplicationController
      @activities = Activity.joins(:activity_type).where(activity_types: {public: false}, event_id: @event.id).order(:activity_type_id, :date, :time)
 
    else
-     redirect_to root_path
+     redirect_to new_user_session_path
    end
   end
                                                 # ======================================================
@@ -153,7 +169,7 @@ class EventsController < ApplicationController
         @question = Question.new
       end
     else
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
                                                 # ======================================================
@@ -180,7 +196,7 @@ class EventsController < ApplicationController
     if current_user
       @tickets= Event.find(params[:id]).tickets.where.not(status: "new")
     else
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
 
