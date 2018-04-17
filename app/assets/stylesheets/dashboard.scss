@@ -81,6 +81,7 @@ main.dashboard{
             white-space: nowrap;
             overflow: hidden;
           }
+        }
         .biggest{
           div.cell{
             @include flex(col, sta, cen);
