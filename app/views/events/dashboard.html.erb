@@ -11,12 +11,14 @@
           <thead>
             <tr>
               <th>Nombre</th>
+              <th>Email</th>
               <th>Referencia</th>
             </tr>
           </thead>
           <% tickets.each do |ticket| %>
           <tr>
             <td> <%= ticket.fullName %></td>
+            <td> <%= ticket.email%></td>
             <td><strong> <%= ticket.reference%></strong></td>
           </tr>
           <% end %>
