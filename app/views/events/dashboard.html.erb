@@ -26,7 +26,7 @@
         <table>
           <thead>
             <tr>
-              <th class= "big"> <div class="cell">Nombre</div></th>
+              <th class= "biggest"> <div class="cell">Nombre</div></th>
               <th class= "big"> <div class="cell">Act Type</div></th>
               <th class="small"><div class="cell">Fecha</div></th>
               <th class="small"><div class="cell">Hora</div></th>
@@ -36,7 +36,7 @@
 
           <% @activities.each do |activity| %>
             <tr>
-              <td class= "big"><div class="cell"><%= link_to activity.name, {activity: activity.id} %></div></td>
+              <td class= "biggest"><div class="cell"><%= link_to activity.name, {activity: activity.id} %></div></td>
               <td class="big"><div class="cell"><%= activity.activity_type.name %></div></td>
               <td class="small"><div class="cell"><%= activity.date %></div></td>
               <td class="small"><div class="cell"><%= activity.time.strftime "%H:%M" %></div></td>
