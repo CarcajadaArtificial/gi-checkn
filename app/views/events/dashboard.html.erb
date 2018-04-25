@@ -13,6 +13,7 @@
               <th>Nombre</th>
               <th>Email</th>
               <th>Referencia</th>
+              <th>Asistencia</th>
             </tr>
           </thead>
           <% tickets.each do |ticket| %>
@@ -20,6 +21,7 @@
             <td> <%= ticket.fullName %></td>
             <td> <%= ticket.email%></td>
             <td><strong> <%= ticket.reference%></strong></td>
+            <td> <%= Attendance.where(ticket_id: ticket.id, activity_id: activity.id).first.attended%></td>
           </tr>
           <% end %>
         </table>
