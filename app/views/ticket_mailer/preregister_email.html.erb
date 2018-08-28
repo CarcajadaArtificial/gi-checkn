@@ -59,6 +59,11 @@
           A continuación está el código de barras de que te identifica. Por favor guárdalo porque será
           necesario para entrar al evento.
         </p>
+        <% if @ticket.event.id == 11 %>
+        <p class="textbox">
+          Recuerda que tu boleto también incluye la entrada a las conferencias magistrales que ofrece el congreso. El horario puedes consultarlo en bit.ly/horarioiis2018
+        </p>
+        <% end %>
         <%= image_tag(attachments['barcode.png'].url) %>
       </td>
       <td width="auto"></td>
