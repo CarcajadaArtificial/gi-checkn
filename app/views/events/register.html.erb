@@ -16,6 +16,11 @@
       Hola, a continuación selecciona la actividad para la cual quieres registrar
       y escanea el código de barras en el cuadro de texto.
     </p>
+    <% if params[:activity_id] %>
+    <p class="subtitle">
+      Cantidad de registrados: <%= Activity.find(params[:activity_id]).tickets.count%>
+    </p>
+    <%end%>
     <!-- ACTIVITY REGISTRANDO -->
     <!-- FORMA DE REGISTER -->
     <%= form_tag(register_path, :method => "get") do %>
