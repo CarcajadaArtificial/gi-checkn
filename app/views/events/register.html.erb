@@ -46,6 +46,10 @@
           <p class="data"><%= @ticket.fullName %></p>
         </div>
         <div class="dataField">
+          <p class="label">Tipo de boleto</p>
+          <p class="data"><%= @ticket.ticket_type.name %></p>
+        </div>
+        <div class="dataField">
           <p class="label">Correo Electrónico</p>
           <p class="data"><%= @ticket.email %></p>
         </div>
