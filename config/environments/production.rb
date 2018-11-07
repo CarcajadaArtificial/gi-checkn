@@ -70,7 +70,7 @@ Rails.application.configure do
     port:587,
     domain: 'checkn.mx',
     authentication: 'login',
-    user_name:'no-reply@checkn.mx',
+    user_name:'hola@checkn.mx',
     password:'@TdFwR9AM2g',
     enable_starttls_auto: true
   }
